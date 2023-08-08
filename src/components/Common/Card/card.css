@@ -1,0 +1,56 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 9px;
+    position: relative;
+  }
+
+  .description {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+  }
+
+  .card-description {
+      color: #938573;
+  }
+
+  .food-image-small {
+    /* height: 11.4em; 
+    width: 10em;
+    object-fit: cover;
+    border-radius: 20px; */
+    width: 100%;
+    aspect-ratio: 0.87;
+    object-fit: cover;
+}
+
+.image-container {
+    width: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+.hover-container {
+    position: absolute;
+    background: #1d14146b;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 0.5em;
+    opacity: 0;
+    transition: ease-in 0.4s;
+}
+
+.hover-container:hover {
+    opacity: 1;
+    transition: ease-out 0.4s;
+}

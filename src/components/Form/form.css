@@ -1,0 +1,15 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5em;
+}
+
+.input-registration {
+  display: flex;
+  border-radius: 1.25em;
+  border: 0.125em solid #fdb01a;
+  padding: 0.82em 2.25em;
+  text-align: start;
+  width: 28em;
+}

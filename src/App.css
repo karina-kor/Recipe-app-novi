@@ -1,38 +1,589 @@
-.App {
-  text-align: center;
+#App {
+  text-align: left;
+  color: #331c00;
+  padding: 3em 0;
+  margin: unset;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0.045em;
+  background-color: #fdb01a;
+  font-family: "Inter", sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+input {
+  font-size: 14px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+h1,
+h2,
+h3 {
+  font-weight: 700;
+  line-height: 103%;
+  letter-spacing: 3%;
+  margin: unset;
+  font-family: "Josefin Sans", sans-serif;
+}
+h1 {
+  font-size: 54px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+h2 {
+  font-size: 40px;
+}
+
+h3 {
+  font-size: 1.25em;
+  color: #938573;
+}
+h4 {
+  margin: unset;
+  padding: unset;
+  letter-spacing: 4.5%;
+  font-weight: 700;
+}
+
+/*
+.p {
+  line-height: 100%;
+  margin: unset;
+  padding: unset;
+}
+*/
+
+.main-description {
+  line-height: 172%;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 160px;
+  max-width: 1300px;
+  width: 100%;
+  z-index: 2;
+}
+
+/* stijl voor de pagina's met een venster */
+.main {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  border: 12px solid #ffffff;
+  height: 800px;
+  border-radius: 43px;
+}
+
+/* algemene stijl voor een pagina*/
+.shadow-card {
+  width: 100%;
+  padding: unset;
+  z-index: 1;
+  border-radius: 43px;
+  filter: drop-shadow(0px 25px 200px #fdb01a);
+  box-sizing: border-box;
+}
+
+.main-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-color: white;
+  width: 100%;
+  height: 100%;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 52px 100px;
+  height: 100%;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 32px;
+  width: 100%;
+  max-width: 450px;
+}
+
+.benefits {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: unset;
+}
+
+.benefit {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 0.5em;
+}
+
+.main-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  padding: 24px 32px;
+  gap: 10px;
+  background: #ffffff;
+  border-radius: 0px 0px 0px 41px;
+  min-width: 9em;
+}
+
+.search-field-area {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+/* .search-field {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 42px;
+  background-color: white;
+  border-radius: 50px;
+  border: unset;
+  width: 100%;
+  margin: 2em;
+}
+
+.search_field_orange {
+  max-width: 36.6em;
+  border: 2px solid #fdb01a;
+  margin: unset;
+}
+
+
+.input-search {
+  border: unset;
+  width: 100%;
+  outline: none;
+} */
+
+
+label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* .input-registration {
+  display: flex;
+  border-radius: 1.25em;
+  border: 0.125em solid #fdb01a;
+  padding: 0.82em 2.25em;
+  text-align: start;
+  width: 28em;
+} */
+
+label {
+  font-weight: 700;
+  gap: 1em;
+}
+
+/* .button {
   color: white;
+  font-size: 1em;
+  border-radius: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border: unset;
+  padding: 1em 2.625em;
+  max-width: fit-content;
+  height: fit-content;
+  cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
+.button-orange {
+  background: linear-gradient(180deg, #ffd028 0%, #fdb01a 100%);
+  box-shadow: 0em 0.375em 1em #ffe587;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.button-green {
+  background: linear-gradient(180deg, #2ab161 0%, #1b6d37 100%);
+  box-shadow: 0em 0.375em 1.25em rgba(42, 177, 97, 0.7);
+} */
+
+.quiz {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  height: 38em;
+}
+
+.quiz-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 2em;
+}
+
+.block-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.block-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+.background_scene {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+
+.white_page {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  padding: 4em 6.25em;
+  gap: 5em;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.nav-right {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 4.5em;
+  width: 100%;
+}
+
+/* .search-field {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 42px;
+  background-color: white;
+  border-radius: 50px;
+  border: unset;
+  width: 100%;
+  margin: 2em;
+}
+ .search_field_orange {
+  max-width: 36.6em;
+  border: 2px solid #fdb01a;
+  margin: unset;
+} */
+
+.search-page {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.search-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 2em;
+  padding-right: 1.5em;
+  width: 100%;
+  max-width: 338px;
+}
+.filter-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+.filter-option {
+  border-radius: 20px;
+  padding: 0.5em;
+  border: 1px solid #fdb01a;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+.filter-active {
+  background-color: #fdb01a;
+}
+
+.input-filter {
+  max-width: 5em;
+}
+/* Hiding standard spin in the browser */
+.input-filter::-webkit-inner-spin-button {
+  max-width: 5em;
+  -webkit-appearance: none;
+}
+
+/* Firefox 
+ .input-filter[type=number] {
+  -moz-appearance: textfield;
+} */
+
+.big-text {
+  text-transform: uppercase;
+  color: #938573;
+  font-weight: 400;
+}
+
+.big-text-active {
+  color: #ffffff;
+}
+
+.filter_wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+
+.right-side-search {
+  width: 100%;
+}
+
+.result-wrapper {
+  /* display: flex;
+  flex-direction: row;
+  gap: 1.15em;
+  flex-wrap: wrap; */
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  justify-items: center;
+  flex-direction: row;
+  gap: 1.15em;
+}
+
+.food_image_big {
+  max-width: 21.4em;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.top-side-page {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+.top-info-page {
+  display: flex;
+  flex-direction: row;
+}
+
+.tags_wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1em;
+  max-width: 12.5em;
+}
+
+/* .recipe-top-text {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding-left: 2em;
+} */
+
+.recipe-description-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.profile-description-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 2em;
+}
+
+.description-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.top-side-left {
+  display: flex;
+  flex-direction: row;
+  gap: 2em;
+  max-width: 56%;
+  width: 100%;
+}
+
+.top-side-right {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 44%;
+}
+
+.bottom_side_left {
+  max-width: 56%;
+  width: 100%;
+}
+
+.bottom-side-recipe {
+  display: flex;
+  flex-direction: row;
+}
+
+.nutrition-description {
+  display: flex;
+  flex-direction: column;
+  max-width: 44%;
+  width: 100%;
+}
+
+.nutrition-table {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.nutrition-row {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.nutrition-row-element {
+  max-width: 33.3%;
+  width: 100%;
+}
+
+.nutrition-row-digit {
+  text-align: end;
+}
+
+.bottom-side-account {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+.avatar-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+}
+
+.account-card-wrapper {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  justify-items: center;
+  flex-direction: row;
+  gap: 1.15em;
+}
+
+.suggestion_wrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+  flex-direction: row;
+  padding-right: 3em;
+  gap: 1.15em;
+}
+
+/* .button-brown {
+  padding: 0.5em 1em;
+  background: #938573;
+  color: #ffffff;
+}
+
+.button-empty {
+  border: 1px solid #938573;
+  background: #ffffff;
+  color: #938573;
+} */
+
+.input-account-data {
+  max-width: 13.75em;
+  width: 100%;
+  border: unset;
+  border-bottom: 1px solid #000;
+}
+
+/* .input-account-data::placeholder {
+  color: #000;
+  font-weight: 700;
+} */
+
+
+input[type="file"] {
+  display: none;
+}
+
+.custom-file-upload {
+  border: 1px solid;
+  border-radius: 20px;
+  background-color: #ffffff;
+  color: #938573;
+  padding: 0.25em 1em;
+  cursor: pointer;
 }
