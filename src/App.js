@@ -1,8 +1,6 @@
 import "./App.css";
 import "../src/components/Common/Button/button.css";
 import "./components/Common/Search/search.css";
-import Quiz from "./components/Pages/Main/Quiz/Quiz";
-import Hero from "./components/Pages/Main/Hero/Hero";
 import SearchPage from "./components/Pages/SearchPage/SearchPage";
 import RecipePage from "./components/Pages/RecipePage/RecipePage";
 import AccountPage from "./components/Pages/AccountPage/AccountPage";
