@@ -16,11 +16,12 @@ import "./blockright.css";
 import "../../../../../App.css";
 import Card from "../../../../Common/Card/Card";
 
-function BlockRight({ type, setRequestBody, handleNext }) {
-  const setChoice = (choice, pageName) => {
-    handleNext(pageName);
-    setRequestBody({ type: choice });
-  };
+function BlockRight({ type, setFilters, handleNext, getQuizResults, results }) {
+  // filterProperty - название поля, которое изменяем, например "dishType"
+  // const setChoice = (filterProperty, value, pageName, skipFilters) => {
+  //   handleNext(pageName);
+  //     setFilters((prev) => ({ ...prev, [filterProperty]: value }));
+  // };
 
   return (
     <div className="block-right-double">
@@ -37,7 +38,10 @@ function BlockRight({ type, setRequestBody, handleNext }) {
             <Button
               buttonClass="button button-orange"
               label={"Sweet"}
-              onClick={() => setChoice("Sweet", "step-2")}
+              onClick={() => {
+                handleNext("step-2");
+                setFilters((prev) => ({ ...prev, dishType: "desserts" }));
+              }}
             />
           </figure>
           <figure className="option">
@@ -45,7 +49,13 @@ function BlockRight({ type, setRequestBody, handleNext }) {
             <Button
               buttonClass="button button-orange"
               label={"Savory"}
-              onClick={() => setChoice("Savory", "step-2")}
+              onClick={() => {
+                handleNext("step-2");
+                setFilters((prev) => ({
+                  ...prev,
+                  dishType: "sandwiches soup salad bread",
+                }));
+              }}
             />
           </figure>
         </>
@@ -62,7 +72,9 @@ function BlockRight({ type, setRequestBody, handleNext }) {
             <Button
               buttonClass="button button-orange"
               label={"Vegetarian"}
-              onClick={() => setChoice("Vegetarian", "step-2a")}
+              onClick={() => {
+                handleNext("step-2a");
+              }}
             />
           </figure>
           <figure className="option">
@@ -70,7 +82,9 @@ function BlockRight({ type, setRequestBody, handleNext }) {
             <Button
               buttonClass="button button-orange"
               label={"Non-vegetarian"}
-              onClick={() => setChoice("Non-vegetarian", "step-3")}
+              onClick={() => {
+                handleNext("step-3");
+              }}
             />
           </figure>
         </>
@@ -87,7 +101,10 @@ function BlockRight({ type, setRequestBody, handleNext }) {
             <Button
               buttonClass="button button-orange"
               label={"Vegetarian"}
-              onClick={() => setChoice("Vegetarian", "step-3")}
+              onClick={() => {
+                handleNext("step-3");
+                setFilters((prev) => ({ ...prev, health: "vegetarian" }));
+              }}
             />
           </figure>
           <figure className="option">
@@ -99,7 +116,10 @@ function BlockRight({ type, setRequestBody, handleNext }) {
             <Button
               buttonClass="button button-orange"
               label={"Vegan"}
-              onClick={() => setChoice("Vegan", "step-3")}
+              onClick={() => {
+                handleNext("step-3");
+                setFilters((prev) => ({ ...prev, health: "vegan" }));
+              }}
             />
           </figure>
         </>
@@ -112,7 +132,10 @@ function BlockRight({ type, setRequestBody, handleNext }) {
             <Button
               buttonClass="button button-orange"
               label={"Low-calorie"}
-              onClick={() => setChoice("Low-calorie", "step-4")}
+              onClick={() => {
+                handleNext("step-4");
+                setFilters((prev) => ({ ...prev, diet: "low-fat" }));
+              }}
             />
           </figure>
           <figure className="option">
@@ -120,7 +143,9 @@ function BlockRight({ type, setRequestBody, handleNext }) {
             <Button
               buttonClass="button button-orange"
               label={"All types"}
-              onClick={() => setChoice("All-types", "step-4")}
+              onClick={() => {
+                handleNext("step-4");
+              }}
             />
           </figure>
         </>
@@ -128,39 +153,55 @@ function BlockRight({ type, setRequestBody, handleNext }) {
 
       {type === "step-4" && (
         <>
-          <section className="allergies">
+          <section className="meal-types">
             <figure className="option">
-              <img className="allergie" src={sesame} alt="sesame"></img>
+              <img className="meal-type" src={sesame} alt="breakfast"></img>
               <Button
                 buttonClass="button button-orange"
-                label={"Sesame"}
-                onClick={() => setChoice("Sesame-free", "step-5")}
+                label={"Breakfast"}
+                onClick={() => {
+                  handleNext("step-5");
+                  setFilters((prev) => ({ ...prev, mealType: "breakfast" }));
+                  getQuizResults();
+                }}
               />
             </figure>
             <figure className="option">
-              <img className="allergie" src={peanuts} alt="peanuts"></img>
+              <img className="meal-type" src={peanuts} alt="brunch"></img>
               <Button
                 buttonClass="button button-orange"
-                label={"Peanuts"}
-                onClick={() => setChoice("Peanuts-free", "step-5")}
+                label={"Brunch"}
+                onClick={() => {
+                  handleNext("step-5");
+                  setFilters((prev) => ({ ...prev, mealType: "brunch" }));
+                  getQuizResults();
+                }}
               />
             </figure>
           </section>
-          <section className="allergies">
+          <section className="meal-types">
             <figure className="option">
-              <img className="allergie" src={gluten} alt="gluten"></img>
+              <img className="meal-type" src={gluten} alt="lunch"></img>
               <Button
                 buttonClass="button button-orange"
-                label={"Gluten"}
-                onClick={() => setChoice("Gluten-free", "step-5")}
+                label={"Lunch"}
+                onClick={() => {
+                  handleNext("step-5");
+                  setFilters((prev) => ({ ...prev, mealType: "lunch" }));
+                  getQuizResults();
+                }}
               />
             </figure>
             <figure className="option">
-              <img className="allergie" src={milk} alt="milk"></img>
+              <img className="meal-type" src={milk} alt="snack"></img>
               <Button
                 buttonClass="button button-orange"
-                label={"Dairy"}
-                onClick={() => setChoice("Dairy-free", "step-5")}
+                label={"Snack"}
+                onClick={() => {
+                  handleNext("step-5");
+                  setFilters((prev) => ({ ...prev, mealType: "snack" }));
+                  getQuizResults();
+                }}
               />
             </figure>
           </section>
@@ -170,13 +211,19 @@ function BlockRight({ type, setRequestBody, handleNext }) {
       {type === "step-5" && (
         <>
           <section className="recipe-options">
+            {results?.map((result) => (
+              <Card key={result.uri} recipe={result.recipe} />
+            ))}
+          </section>
+
+          {/* <section className="recipe-options">
             <Card />
             <Card />
           </section>
           <section className="recipe-options">
             <Card />
             <Card />
-          </section>
+          </section> */}
         </>
       )}
     </div>

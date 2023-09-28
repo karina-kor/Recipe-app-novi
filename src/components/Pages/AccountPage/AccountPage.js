@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "../../Common/Card/Card";
 import { ReactComponent as ProfilePicture } from "../../../assets/icons/profile-pic.svg";
 import Button from "../../Common/Button/Button";
@@ -9,6 +9,50 @@ import AccountBlockRight from "./AccountBlockRight/AccountBlockRight";
 
 function AccountPage() {
   const [type, setPageType] = useState("info-page");
+  const [likedRecipes, setLikedRecipes] = useState([]);
+  const [viewedRecipes, setViewedRecipes] = useState([]);
+
+  useEffect(() => {
+    const localStorageLikedRecipes = JSON.parse(
+      localStorage.getItem("likedRecipes")
+    );
+    setLikedRecipes(localStorageLikedRecipes);
+  }, []);
+
+  useEffect(() => {
+    const localStorageViewedRecipes = JSON.parse(
+      localStorage.getItem("viewedRecipes")
+    );
+    setViewedRecipes(localStorageViewedRecipes);
+  }, []);
+
+  const handleHoverButtonDeleteLiked = (recipe) => {
+    const localStorageLikedRecipes = JSON.parse(
+      localStorage.getItem("likedRecipes")
+    );
+    const recipesWithNoChosenRecipe = localStorageLikedRecipes.filter(
+      (lslRecipe) => lslRecipe.uri !== recipe.uri
+    );
+    localStorage.setItem(
+      "likedRecipes",
+      JSON.stringify(recipesWithNoChosenRecipe)
+    );
+    window.location.reload();
+  };
+
+  const handleHoverButtonDeleteViewed = (recipe) => {
+    const localStorageViewedRecipes = JSON.parse(
+      localStorage.getItem("viewedRecipes")
+    );
+    const recipesWithNoChosenRecipe = localStorageViewedRecipes.filter(
+      (lslRecipe) => lslRecipe.uri !== recipe.uri
+    );
+    localStorage.setItem(
+      "viewedRecipes",
+      JSON.stringify(recipesWithNoChosenRecipe)
+    );
+    window.location.reload();
+  };
 
   return (
     <section className="shadow-card white_page">
@@ -28,24 +72,27 @@ function AccountPage() {
         <section className="description-text">
           <h4>Favourite recipes</h4>
           <section className="account-card-wrapper">
-            <Card hasButton />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
+            {likedRecipes?.map((recipe) => (
+              <Card
+                hasButton
+                recipe={recipe}
+                key={recipe?.uri}
+                onHoverButtonClick={handleHoverButtonDeleteLiked}
+              />
+            ))}
           </section>
         </section>
         <section className="description-text">
           <h4>Recently viewed</h4>
           <section className="account-card-wrapper">
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
+            {viewedRecipes?.map((recipe) => (
+              <Card
+                hasButton
+                recipe={recipe}
+                key={recipe?.uri}
+                onHoverButtonClick={handleHoverButtonDeleteViewed}
+              />
+            ))}
           </section>
         </section>
       </section>

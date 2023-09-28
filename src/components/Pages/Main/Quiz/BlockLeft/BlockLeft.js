@@ -1,14 +1,15 @@
 import React from "react";
 import Button from "../../../../Common/Button/Button";
-import { ReactComponent as Logo } from "../../../../../assets/icons/logo.svg";
+import ButtonRouterLink from "../../../../Common/Button/ButtonRouterLink";
+import LogoRouterLink from "../../../../Common/LogoRouterLink/LogoRouterLink";
 
-function BlockLeft({ type, handleNext }) {
+function BlockLeft({ type, handleNext, setFilters }) {
   return (
     <div className="block-left">
       {type === "step-0" && (
         <>
           <section className="content">
-            <Logo />
+            <LogoRouterLink />
             <h2>Unleash Your Taste Bud's Perfect Match</h2>
             <p className="main-description">
               Discover your perfect dishes with our personalized food
@@ -28,7 +29,7 @@ function BlockLeft({ type, handleNext }) {
       {type === "step-1" && (
         <>
           <section className="content">
-            <Logo />
+            <LogoRouterLink />
             <h3>1/4</h3>
             <h2>Do you prefer sweet or savory dishes?</h2>
             <p className="main-description">
@@ -42,7 +43,7 @@ function BlockLeft({ type, handleNext }) {
       {type === "step-2" && (
         <>
           <section className="content">
-            <Logo />
+            <LogoRouterLink />
             <h3>2/4</h3>
             <h2>Are you following a vegetarian or non-vegetarian diet?</h2>
             <p className="main-description">
@@ -56,7 +57,7 @@ function BlockLeft({ type, handleNext }) {
       {type === "step-2a" && (
         <>
           <section className="content">
-            <Logo />
+            <LogoRouterLink />
             <h3>2a/4</h3>
             <h2>Are you following a vegetarian or vegan diet?</h2>
             <p className="main-description">
@@ -70,7 +71,7 @@ function BlockLeft({ type, handleNext }) {
       {type === "step-3" && (
         <>
           <section className="content">
-            <Logo />
+            <LogoRouterLink />
             <h3>3/4</h3>
             <h2>
               Are you interested in low-calorie recipes or are you open to all
@@ -86,7 +87,7 @@ function BlockLeft({ type, handleNext }) {
       {type === "step-4" && (
         <>
           <section className="content">
-            <Logo />
+            <LogoRouterLink />
             <h3>4/4</h3>
             <h2>Do you have any allergies?</h2>
             <p className="main-description">
@@ -99,7 +100,7 @@ function BlockLeft({ type, handleNext }) {
       {type === "step-5" && (
         <>
           <section className="content">
-            <Logo />
+            <LogoRouterLink />
             <h2>
               Voila! Here are your top 4 recipe matches tailored just for you!
             </h2>
@@ -113,9 +114,16 @@ function BlockLeft({ type, handleNext }) {
               <Button
                 buttonClass="button button-orange"
                 label="Try again"
-                onClick={() => handleNext("step-0")}
+                onClick={() => {
+                  setFilters({});
+                  handleNext("step-0");
+                }}
               />
-              <Button buttonClass="button button-green" label="All recipes" />
+              <ButtonRouterLink
+                buttonClass="button button-green"
+                label="All recipes"
+                to={"/search"}
+              />
             </div>
           </section>
         </>

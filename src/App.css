@@ -15,7 +15,7 @@
 }
 
 input {
-  font-size: 14px;
+  font-size: 1em;
 }
 
 h1,
@@ -28,11 +28,11 @@ h3 {
   font-family: "Josefin Sans", sans-serif;
 }
 h1 {
-  font-size: 54px;
+  font-size: 3.86em;
 }
 
 h2 {
-  font-size: 40px;
+  font-size: 2.85em;
 }
 
 h3 {
@@ -46,13 +46,10 @@ h4 {
   font-weight: 700;
 }
 
-/*
-.p {
-  line-height: 100%;
-  margin: unset;
-  padding: unset;
+.link-unset {
+  text-decoration: unset;
+  color: #331c00;
 }
-*/
 
 .main-description {
   line-height: 172%;
@@ -63,8 +60,8 @@ h4 {
   justify-content: center;
   align-items: center;
   padding: 0px;
-  gap: 160px;
-  max-width: 1300px;
+  gap: 11.4em;
+  max-width: 92.85em;
   width: 100%;
   z-index: 2;
 }
@@ -76,8 +73,8 @@ h4 {
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  border: 12px solid #ffffff;
-  height: 800px;
+  border: 0.9em solid #ffffff;
+  height: 57em;
   border-radius: 43px;
 }
 
@@ -87,8 +84,26 @@ h4 {
   padding: unset;
   z-index: 1;
   border-radius: 43px;
-  filter: drop-shadow(0px 25px 200px #fdb01a);
+  filter: drop-shadow(0px 25px 80px #fdb01a);
   box-sizing: border-box;
+}
+
+.error-card {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: flex-start;
+  height: 100%;
+  gap: 12em;
+  min-height: 50em;
+}
+
+.error-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 .main-left {
@@ -106,7 +121,7 @@ h4 {
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  margin: 52px 100px;
+  margin: 3.7em 7.1em;
   height: 100%;
 }
 
@@ -115,9 +130,9 @@ h4 {
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
-  gap: 32px;
+  gap: 2.3em;
   width: 100%;
-  max-width: 450px;
+  max-width: 32.1em;
 }
 
 .benefits {
@@ -140,7 +155,7 @@ h4 {
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
-  padding: 0px;
+  padding: 0;
   width: 100%;
   height: 100%;
   box-sizing: border-box;
@@ -151,8 +166,8 @@ h4 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 24px 32px;
-  gap: 10px;
+  padding: 1.7em 2.3em;
+  gap: 0.7em;
   background: #ffffff;
   border-radius: 0px 0px 0px 41px;
   min-width: 9em;
@@ -214,30 +229,6 @@ label {
   gap: 1em;
 }
 
-/* .button {
-  color: white;
-  font-size: 1em;
-  border-radius: 50px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  border: unset;
-  padding: 1em 2.625em;
-  max-width: fit-content;
-  height: fit-content;
-  cursor: pointer;
-}
-
-.button-orange {
-  background: linear-gradient(180deg, #ffd028 0%, #fdb01a 100%);
-  box-shadow: 0em 0.375em 1em #ffe587;
-}
-
-.button-green {
-  background: linear-gradient(180deg, #2ab161 0%, #1b6d37 100%);
-  box-shadow: 0em 0.375em 1.25em rgba(42, 177, 97, 0.7);
-} */
 
 .quiz {
   display: flex;
@@ -306,27 +297,10 @@ header {
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
-  gap: 4.5em;
+  gap: 4em;
   width: 100%;
 }
 
-/* .search-field {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 42px;
-  background-color: white;
-  border-radius: 50px;
-  border: unset;
-  width: 100%;
-  margin: 2em;
-}
- .search_field_orange {
-  max-width: 36.6em;
-  border: 2px solid #fdb01a;
-  margin: unset;
-} */
 
 .search-page {
   display: flex;
@@ -364,6 +338,7 @@ header {
 
 .input-filter {
   max-width: 5em;
+  color: #938573;
 }
 /* Hiding standard spin in the browser */
 .input-filter::-webkit-inner-spin-button {
@@ -405,14 +380,16 @@ header {
   gap: 1.15em;
   flex-wrap: wrap; */
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  justify-items: center;
-  flex-direction: row;
-  gap: 1.15em;
+  grid-template-columns: repeat(auto-fill, 136px);
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+  justify-items: stretch;
+  align-items: stretch;
 }
 
 .food_image_big {
   max-width: 21.4em;
+  max-height: 21.4em;
   aspect-ratio: 1;
   object-fit: cover;
   border-radius: 20px;
@@ -451,6 +428,7 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  max-height: 21.4em;
 }
 
 .profile-description-group {
@@ -470,7 +448,7 @@ header {
   display: flex;
   flex-direction: row;
   gap: 2em;
-  max-width: 56%;
+  max-width: 50%;
   width: 100%;
 }
 
@@ -478,11 +456,12 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 44%;
+  width: 50%;
+  gap: 1em;
 }
 
 .bottom_side_left {
-  max-width: 56%;
+  max-width: 50%;
   width: 100%;
 }
 
@@ -515,6 +494,11 @@ header {
   width: 100%;
 }
 
+.nutrition-sub-element {
+  text-transform: lowercase;
+  padding-left: 1em;
+}
+
 .nutrition-row-digit {
   text-align: end;
 }
@@ -534,20 +518,26 @@ header {
 }
 
 .account-card-wrapper {
-  display: grid;
+  /* display: grid;
   grid-template-columns: repeat(8, 1fr);
   justify-items: center;
   flex-direction: row;
-  gap: 1.15em;
+  gap: 1.15em; */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 120px);
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+  justify-items: stretch;
+  align-items: stretch;
 }
 
 .suggestion_wrapper {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  justify-items: center;
-  flex-direction: row;
-  padding-right: 3em;
-  gap: 1.15em;
+  grid-template-columns: repeat(auto-fill, 120px);
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+  justify-items: stretch;
+  align-items: stretch;
 }
 
 /* .button-brown {

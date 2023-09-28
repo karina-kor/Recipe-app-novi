@@ -3,24 +3,29 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 14px 42px;
+    padding: 1em 3em;
     background-color: white;
     border-radius: 50px;
     border: unset;
     width: 100%;
-    margin: 2em;
+    margin: 2.3em;
   }
 
   .search-field-orange {
     max-width: 36.6em;
-    border: 2px solid #fdb01a;
+    border: 0.143em solid #fdb01a;
     margin: unset;
   }
   
-
   .input-search {
     border: unset;
     width: 100%;
     outline: none;
+    color: #938573;
   }
 
+.search-button {
+  border: 0;
+  background-color: unset;
+  cursor: pointer;
+}

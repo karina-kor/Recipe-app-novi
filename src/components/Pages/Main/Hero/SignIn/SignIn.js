@@ -1,15 +1,12 @@
 import React from "react";
-import Button from "../../../../Common/Button/Button";
-import Search from "../../../../Common/Search/Search";
-import Form from "../../../../Form/Form";
-import { ReactComponent as Logo } from "../../../../../assets/icons/logo.svg";
+import FormSignIn from "../../../../Form/FormSignIn";
 
 function SignIn({ pageName, pageChangingFunctionProp }) {
   return (
     <>
       <section className="intro">
         <h2>Welcome back!</h2>
-        <Form />
+        <FormSignIn />
       </section>
       <section className="sign-up-link">
         <p>

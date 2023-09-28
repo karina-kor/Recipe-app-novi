@@ -1,56 +1,67 @@
 .card {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 9px;
-    position: relative;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 9px;
+  position: relative;
+  width: 100%;
+}
 
-  .description {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-  }
+.description {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 9em;
+}
 
-  .card-description {
-      color: #938573;
-  }
+.card-description {
+  color: #938573;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 9em;
+}
 
-  .food-image-small {
-    /* height: 11.4em; 
-    width: 10em;
-    object-fit: cover;
-    border-radius: 20px; */
-    width: 100%;
-    aspect-ratio: 0.87;
-    object-fit: cover;
+.card-title-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.food-image-small {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 0.87;
+  object-fit: cover;
 }
 
 .image-container {
-    width: 100%;
-    border-radius: 20px;
-    overflow: hidden;
-    position: relative;
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
 }
 
 .hover-container {
-    position: absolute;
-    background: #1d14146b;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding-top: 0.5em;
-    opacity: 0;
-    transition: ease-in 0.4s;
+  position: absolute;
+  background: #1d14146b;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 0.5em;
+  opacity: 0;
+  transition: ease-in 0.4s;
 }
 
 .hover-container:hover {
-    opacity: 1;
-    transition: ease-out 0.4s;
+  opacity: 1;
+  transition: ease-out 0.4s;
 }

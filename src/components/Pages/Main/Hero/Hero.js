@@ -2,10 +2,10 @@ import React from "react";
 import { useState } from "react";
 import "../../../../App.css";
 import Greetings from "./Greetings/Greetings";
-import { ReactComponent as Logo } from "../../../../assets/icons/logo.svg";
 import SignIn from "./SignIn/SignIn";
 import SignUp from "./SignUp/SignUp";
 import HeroBlockRight from "./HeroBlockRight/HeroBlockRight";
+import LogoRouterLink from "../../../Common/LogoRouterLink/LogoRouterLink";
 
 function Hero({ scrollFn }) {
   const [pageName, setPageName] = useState("hero");
@@ -14,7 +14,7 @@ function Hero({ scrollFn }) {
     <main className="main shadow-card">
       <div className="main-left">
         <section className="content">
-          <Logo />
+          <LogoRouterLink />
           {pageName === "hero" && <Greetings scrollFn={scrollFn} />}
           {pageName === "signin" && (
             <SignIn pageChangingFunctionProp={setPageName} />

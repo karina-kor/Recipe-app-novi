@@ -1,18 +1,12 @@
 import React, { useState } from "react";
 
-function Tag({ label }) {
-  const [isActive, setIsActive] = useState(false);
-
-  const handleClickTag = () => {
-    setIsActive(!isActive);
-  };
-
+function Tag({ label, isActive, setIsActive }) {
   return (
     <button
-      className={`filter-option big-text ${
+      className={`filter-option big-text  ${
         isActive && "filter-active big-text-active"
       }`}
-      onClick={handleClickTag}
+      onClick={() => setIsActive?.()}
     >
       {label}
     </button>
