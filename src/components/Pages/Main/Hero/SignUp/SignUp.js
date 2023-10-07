@@ -11,7 +11,10 @@ function SignUp({ pageName, pageChangingFunctionProp }) {
       <section className="sign-up-link">
         <p>
           Already have an account?{" "}
-          <span onClick={() => pageChangingFunctionProp("signin")}>
+          <span
+            className="bold-link"
+            onClick={() => pageChangingFunctionProp("signin")}
+          >
             Sign in
           </span>
         </p>

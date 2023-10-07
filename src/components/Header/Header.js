@@ -1,13 +1,21 @@
 import React from "react";
 import "../Common/Search/search.css";
 import ButtonRouterLink from "../Common/Button/ButtonRouterLink";
-import Search from "../Common/Search/Search";
-import { Link } from "react-router-dom";
 import LogoRouterLink from "../Common/LogoRouterLink/LogoRouterLink";
-import { useParams } from "react-router";
+import { useSelector, useDispatch } from "react-redux";
+import Search from "../Common/Search/Search";
 
-function Header({ headerClass, navClass, searchClass }) {
-  const { searchText } = useParams();
+function Header({
+  headerClass,
+  navClass,
+  searchClass,
+  search,
+  setSearch,
+  handleButtonClick,
+}) {
+  const { email, id } = useSelector((state) => state.auth);
+
+  console.log("Header search text", search);
 
   return (
     <header className={headerClass}>
@@ -18,13 +26,23 @@ function Header({ headerClass, navClass, searchClass }) {
           inputClass="input-search"
           inputType="text"
           inputPlaceholder={"Search a recipe..."}
-          searchValue={searchText}
+          search={search}
+          setSearch={setSearch}
+          handleButtonClick={handleButtonClick}
         />
-        <ButtonRouterLink
-          buttonClass="button button-orange"
-          label="Log in"
-          to={"/"}
-        />
+        {email ? (
+          <ButtonRouterLink
+            buttonClass="button button-orange"
+            label="Account"
+            to="/account"
+          />
+        ) : (
+          <ButtonRouterLink
+            buttonClass="button button-orange"
+            label="Log in"
+            to="/"
+          />
+        )}
       </section>
     </header>
   );

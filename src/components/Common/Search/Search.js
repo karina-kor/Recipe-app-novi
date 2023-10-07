@@ -8,23 +8,18 @@ function Search({
   inputClass,
   inputType,
   inputPlaceholder,
-  searchValue,
+  handleButtonClick,
+  setSearch,
+  search,
 }) {
-  const navigate = useNavigate();
-  const [searchText, setSearchText] = useState(searchValue || "");
-
-  const handleButtonClick = () => {
-    navigate(`/search/${searchText}`);
-  };
-
   return (
     <div className={searchClass}>
       <input
         className={inputClass}
         type={inputType}
         placeholder={inputPlaceholder}
-        value={searchText}
-        onChange={(e) => setSearchText(e.target.value)}
+        value={search}
+        onChange={(e) => setSearch(e.target.value || "")}
       ></input>
       <button className="search-button" onClick={handleButtonClick}>
         <Search_button />

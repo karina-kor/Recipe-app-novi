@@ -6,24 +6,24 @@ import "../../../App.css";
 import axios from "axios";
 import { useParams } from "react-router";
 
-function SearchPage() {
-  // Убрать
-  // Начало
-  const appKey = "bb5e26e7d2295dcde8cf13d5b57a4ae5";
-  const appId = "81f321c0";
+const appKey = process.env.REACT_APP_RECIPE_APP_KEY;
+const appId = process.env.REACT_APP_RECIPE_APP_ID;
+const apiUrl = process.env.REACT_APP_RECIPE_APP_URL;
 
-  const apiUrl = "https://api.edamam.com/";
-  const search = "";
+function SearchPage() {
+  const { searchText } = useParams();
+  const [search, setSearch] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setSearch(searchText);
+  }, [searchText]);
+
+  console.log(searchText);
 
   const url = `${apiUrl}search`;
-  // Конец
 
   const [filters, setFilters] = useState({
-    // diet: "", //  “balanced”, “high-protein”, “high-fiber”, “low-fat”, “low-carb”, “low-sodium”
-    // ingr: 50,
-    // health: "", //
-    // mealType: "", //lunch, dinner, breakfast, snack
-    // dishType: "", // dishType=soup&dishType=dessert
     calories: "100-10000",
   });
 
@@ -33,7 +33,16 @@ function SearchPage() {
 
   const [results, setResults] = useState([]);
 
+  const handleSearch = () => {
+    getRecipes();
+  };
+
   useEffect(() => {
+    getRecipes();
+  }, [filters]);
+
+  const getRecipes = () => {
+    setIsLoading(true);
     axios
       .get(url, {
         params: {
@@ -48,26 +57,40 @@ function SearchPage() {
       .then((data) => {
         if (data.data.hits) {
           setResults(data.data.hits);
-          console.log(data);
         }
+        setIsLoading(false);
       })
-      .catch((err) => console.log(err));
-  }, [filters]);
+      .catch((err) => {
+        console.log(err);
+        setIsLoading(false);
+      });
+  };
 
   return (
     <section className="shadow-card white_page">
-      <Header headerClass="header" navClass="nav-right" />
+      <Header
+        headerClass="header"
+        navClass="nav-right"
+        setSearch={setSearch}
+        search={search}
+        handleButtonClick={handleSearch}
+      />
       <div className="search-page">
-        {/* {results.map((result) => {
-          return <h2>{result.recipe.label}</h2>;
-        })} */}
         <Filters filters={filters} setFilters={setFilters} />
         <section className="right-side-search">
-          <section className="result-wrapper">
-            {results?.map((result) => {
-              return <Card recipe={result.recipe} />;
-            })}
-          </section>
+          {isLoading ? (
+            <div>Loading...</div>
+          ) : (
+            <section className="result-wrapper">
+              {results.length > 0 ? (
+                results?.map((result) => (
+                  <Card recipe={result.recipe} key={result.uri} />
+                ))
+              ) : (
+                <div>Nothing found :(</div>
+              )}
+            </section>
+          )}
         </section>
       </div>
     </section>

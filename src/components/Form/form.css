@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: center;
   gap: 1.5em;
+  width: 400px;
 }
 
 .input-registration {

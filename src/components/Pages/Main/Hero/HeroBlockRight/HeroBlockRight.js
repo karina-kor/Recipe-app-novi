@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../../../../Common/Button/Button";
 import Search from "../../../../Common/Search/Search";
+import { useNavigate } from "react-router";
 
 function HeroBlockRight({ pageName, pageChangingFunctionProp }) {
+  const navigate = useNavigate();
+  const [search, setSearch] = useState("");
+
+  const handleButtonClick = () => {
+    navigate("/search/" + search);
+  };
+
   return (
     <div className="main-right">
       <>
@@ -23,6 +31,9 @@ function HeroBlockRight({ pageName, pageChangingFunctionProp }) {
             inputClass="input-search"
             inputType="text"
             inputPlaceholder={"Search a recipe..."}
+            handleButtonClick={handleButtonClick}
+            search={search}
+            setSearch={setSearch}
           />
         </div>
       </>

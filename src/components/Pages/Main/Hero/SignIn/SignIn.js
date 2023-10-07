@@ -10,8 +10,9 @@ function SignIn({ pageName, pageChangingFunctionProp }) {
       </section>
       <section className="sign-up-link">
         <p>
-          Don&apos;t have an account?{" "}
+          Don't have an account?
           <span
+            className="bold-link"
             onClick={() =>
               pageChangingFunctionProp(
                 pageName === "signin" ? "signup" : "signup"

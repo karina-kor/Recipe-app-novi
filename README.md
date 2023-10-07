@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Tasty table recipe webapplication
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a simple web application that allows users to search, save, and share recipes. The app uses the Edamam API to retrieve recipe data and Firebase as a backend to store user information. This application has been created for educational purposes, as part of my studies as a frontend developer.
 
 ## Available Scripts
 

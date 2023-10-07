@@ -1,30 +1,51 @@
 import React, { useState, useEffect } from "react";
 import Header from "../../Header/Header";
 import Card from "../../Common/Card/Card";
-import food_image from "../../../assets/pictures/food_image.png";
 import Button from "../../Common/Button/Button";
-import ButtonRouterLink from "../../Common/Button/ButtonRouterLink";
 import ButtonLink from "../../Common/Button/ButtonLink";
 import axios from "axios";
 import { useParams } from "react-router";
+import { useSelector } from "react-redux";
+
+const appKey = process.env.REACT_APP_RECIPE_APP_KEY;
+const appId = process.env.REACT_APP_RECIPE_APP_ID;
+const apiUrl = process.env.REACT_APP_RECIPE_APP_URL;
 
 function RecipePage() {
-  const appKey = "bb5e26e7d2295dcde8cf13d5b57a4ae5";
-  const appId = "81f321c0";
-
   let { uri } = useParams();
-
-  const apiUrl = "https://api.edamam.com/";
-  const search = "test";
-  const someRecipeUri =
-    "http://www.edamam.com/ontologies/edamam.owl#recipe_c44c0080f113687f76c0d29f1dc8983b";
-
+  const search = "soup";
   const url = `${apiUrl}search`;
 
   const [result, setResult] = useState();
   const [suggestions, setSuggestions] = useState([]);
   const [likedRecipes, setLikedRecipes] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const { token } = useSelector((state) => state.auth);
   // const [viewedRecipes, setViewedRecipes] = useState([]);
+
+  const getRecipes = () => {
+    setIsLoading(true);
+    axios
+      .get(url, {
+        params: {
+          app_id: appId,
+          app_key: appKey,
+          from: 0,
+          to: 10,
+          q: search,
+        },
+      })
+      .then((data) => {
+        if (data.data.hits) {
+          setSuggestions(data.data.hits);
+        }
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsLoading(false);
+      });
+  };
 
   useEffect(() => {
     axios
@@ -39,20 +60,14 @@ function RecipePage() {
         setResult(data.data[0]);
         // console.log(data);
       });
-    axios
-      .get(url, {
-        params: { app_id: appId, app_key: appKey, q: search },
-      })
-      .then((data) => {
-        setSuggestions(data.data.hits);
-        // console.log(data);
-      });
-  }, [uri]);
-
-  // const [likedRecipes, setLikedRecipes] = useState([]);
-  // const [viewedRecipes, setOpenedRecipes] = useState([]);
+    getRecipes();
+  }, [uri, url]);
 
   const handleAddToFavorite = () => {
+    if (!token) {
+      alert("You have to login for the recipe saving ");
+    }
+
     const localStorageLikedRecipes = JSON.parse(
       localStorage.getItem("likedRecipes")
     );
@@ -61,15 +76,6 @@ function RecipePage() {
 
     localStorage.setItem("likedRecipes", JSON.stringify(newLikedArray));
   };
-
-  // const handleAddToViewed = () => {
-  //   const localStorageViewedRecipes = JSON.parse(
-  //     localStorage.getItem("viewedRecipes")
-  //   );
-  //   const newViewedArray = [...(localStorageViewedRecipes || []), result];
-  //   localStorage.setItem("viewedRecipes", JSON.stringify(newViewedArray));
-  //   console.log(viewedRecipes);
-  // };
 
   return (
     <section className="shadow-card white_page">
@@ -109,8 +115,8 @@ function RecipePage() {
                   onClick={handleAddToFavorite}
                   buttonClass={"big-text button button-brown button-empty"}
                   label={"Save"}
-                  to="/"
                 />
+
                 <Button
                   onClick={() => navigator.clipboard.writeText(result?.url)}
                   buttonClass={"big-text button button-brown button-empty"}
@@ -151,14 +157,18 @@ function RecipePage() {
           <h4>Try also</h4>
           {likedRecipes && <div>{likedRecipes[1]?.uri}</div>}
           <section className="suggestion_wrapper">
-            {suggestions?.map((suggestion) => {
-              return (
-                <Card
-                  recipe={suggestion?.recipe}
-                  key={suggestion?.recipe?.uri}
-                />
-              );
-            })}
+            {isLoading ? (
+              <div>Loading...</div>
+            ) : (
+              suggestions?.map((suggestion) => {
+                return (
+                  <Card
+                    recipe={suggestion?.recipe}
+                    key={suggestion?.recipe?.uri}
+                  />
+                );
+              })
+            )}
           </section>
           {/* <section className="suggestion_wrapper">
             {likedRecipes?.map((result) => {

@@ -6,11 +6,14 @@ import Header from "../../Header/Header";
 import "../../../App.css";
 import AccountBlockLeft from "./AccountBlockLeft/AccountBlockLeft";
 import AccountBlockRight from "./AccountBlockRight/AccountBlockRight";
+import { useSelector } from "react-redux";
 
 function AccountPage() {
   const [type, setPageType] = useState("info-page");
   const [likedRecipes, setLikedRecipes] = useState([]);
   const [viewedRecipes, setViewedRecipes] = useState([]);
+
+  const { email, id, displayName } = useSelector((state) => state.auth);
 
   useEffect(() => {
     const localStorageLikedRecipes = JSON.parse(
@@ -58,7 +61,7 @@ function AccountPage() {
     <section className="shadow-card white_page">
       <Header headerClass="header" navClass="nav-right" />
       <section className="top-side-page">
-        <h3>John Doe</h3>
+        <h3>{displayName}</h3>
         <section className="top-info-page">
           <section className="top-side-left">
             <AccountBlockLeft type={type} setPage={setPageType} />
