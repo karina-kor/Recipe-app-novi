@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
 import Card from "../../Common/Card/Card";
-import { ReactComponent as ProfilePicture } from "../../../assets/icons/profile-pic.svg";
-import Button from "../../Common/Button/Button";
 import Header from "../../Header/Header";
 import "../../../App.css";
 import AccountBlockLeft from "./AccountBlockLeft/AccountBlockLeft";
 import AccountBlockRight from "./AccountBlockRight/AccountBlockRight";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function AccountPage() {
   const [type, setPageType] = useState("info-page");
   const [likedRecipes, setLikedRecipes] = useState([]);
   const [viewedRecipes, setViewedRecipes] = useState([]);
+  const navigate = useNavigate();
+  const [search, setSearch] = useState("");
 
-  const { email, id, displayName } = useSelector((state) => state.auth);
+  const { displayName } = useSelector((state) => state.auth);
 
   useEffect(() => {
     const localStorageLikedRecipes = JSON.parse(
@@ -57,9 +58,19 @@ function AccountPage() {
     window.location.reload();
   };
 
+  const handleButtonClick = () => {
+    navigate("/search/" + search);
+  };
+
   return (
     <section className="shadow-card white_page">
-      <Header headerClass="header" navClass="nav-right" />
+      <Header
+        headerClass="header"
+        navClass="nav-right"
+        handleButtonClick={handleButtonClick}
+        search={search}
+        setSearch={setSearch}
+      />
       <section className="top-side-page">
         <h3>{displayName}</h3>
         <section className="top-info-page">

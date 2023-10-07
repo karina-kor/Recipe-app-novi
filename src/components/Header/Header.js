@@ -2,20 +2,17 @@ import React from "react";
 import "../Common/Search/search.css";
 import ButtonRouterLink from "../Common/Button/ButtonRouterLink";
 import LogoRouterLink from "../Common/LogoRouterLink/LogoRouterLink";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import Search from "../Common/Search/Search";
 
 function Header({
   headerClass,
   navClass,
-  searchClass,
   search,
   setSearch,
   handleButtonClick,
 }) {
   const { email, id } = useSelector((state) => state.auth);
-
-  console.log("Header search text", search);
 
   return (
     <header className={headerClass}>

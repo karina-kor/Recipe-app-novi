@@ -37,11 +37,19 @@ export const authSlice = createSlice({
     setPhotoUrl: (state, action) => {
       state.photoURL = action.payload;
     },
+    setEmail: (state, action) => {
+      state.email = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setUser, removeUser, setNameAndPhotoUrl, setPhotoUrl } =
-  authSlice.actions;
+export const {
+  setUser,
+  removeUser,
+  setNameAndPhotoUrl,
+  setPhotoUrl,
+  setEmail,
+} = authSlice.actions;
 
 export default authSlice.reducer;

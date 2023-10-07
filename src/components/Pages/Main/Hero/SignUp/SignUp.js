@@ -1,7 +1,18 @@
 import React from "react";
 import FormSignUp from "../../../../Form/FormSignUp";
+import { useNavigate } from "react-router-dom";
 
-function SignUp({ pageName, pageChangingFunctionProp }) {
+function SignUp({ pageName, pageChangingFunctionProp, hasNavigate = false }) {
+  const navigate = useNavigate();
+
+  const handleClickSwap = () => {
+    if (hasNavigate) {
+      navigate("/signin");
+      return;
+    }
+    pageChangingFunctionProp("signin");
+  };
+
   return (
     <>
       <section className="intro">
@@ -11,10 +22,7 @@ function SignUp({ pageName, pageChangingFunctionProp }) {
       <section className="sign-up-link">
         <p>
           Already have an account?{" "}
-          <span
-            className="bold-link"
-            onClick={() => pageChangingFunctionProp("signin")}
-          >
+          <span className="bold-link" onClick={() => handleClickSwap()}>
             Sign in
           </span>
         </p>

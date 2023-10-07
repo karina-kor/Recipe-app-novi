@@ -9,29 +9,25 @@ import { useParams } from "react-router";
 const appKey = process.env.REACT_APP_RECIPE_APP_KEY;
 const appId = process.env.REACT_APP_RECIPE_APP_ID;
 const apiUrl = process.env.REACT_APP_RECIPE_APP_URL;
+const url = `${apiUrl}search`;
 
 function SearchPage() {
   const { searchText } = useParams();
   const [search, setSearch] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    setSearch(searchText);
-  }, [searchText]);
-
-  console.log(searchText);
-
-  const url = `${apiUrl}search`;
-
   const [filters, setFilters] = useState({
     calories: "100-10000",
   });
+  const [results, setResults] = useState([]);
 
   useEffect(() => {
-    console.log(filters);
-  }, [filters]);
+    getRecipes();
+    setSearch(searchText);
+  }, [searchText]);
 
-  const [results, setResults] = useState([]);
+  useEffect(() => {
+    console.log("filters", filters);
+  }, [filters]);
 
   const handleSearch = () => {
     getRecipes();
@@ -42,6 +38,9 @@ function SearchPage() {
   }, [filters]);
 
   const getRecipes = () => {
+    if (isLoading) {
+      return;
+    }
     setIsLoading(true);
     axios
       .get(url, {
@@ -50,7 +49,7 @@ function SearchPage() {
           app_key: appKey,
           from: 0,
           to: 100,
-          q: search,
+          q: search || searchText,
           ...filters,
         },
       })
@@ -73,7 +72,7 @@ function SearchPage() {
         navClass="nav-right"
         setSearch={setSearch}
         search={search}
-        handleButtonClick={handleSearch}
+        handleButtonClick={() => handleSearch()}
       />
       <div className="search-page">
         <Filters filters={filters} setFilters={setFilters} />

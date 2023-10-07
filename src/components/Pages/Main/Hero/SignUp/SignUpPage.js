@@ -5,7 +5,7 @@ export default function SignUpPage() {
   return (
     <div className="sign-container">
       <div className="white-container">
-        <SignUp />
+        <SignUp hasNavigate={true} />
       </div>
     </div>
   );

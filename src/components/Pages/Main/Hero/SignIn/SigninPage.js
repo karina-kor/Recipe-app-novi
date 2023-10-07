@@ -6,7 +6,7 @@ export default function SigninPage() {
   return (
     <div className="sign-container">
       <div className="white-container">
-        <SignIn />
+        <SignIn hasNavigate={true} />
       </div>
     </div>
   );

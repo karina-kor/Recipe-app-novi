@@ -17,12 +17,10 @@ function FormSignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
-  const [photoURL, setPhotoURL] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
 
   const signup = (e) => {
     e.preventDefault();
-    console.log("signing up");
     if (!email || !password) {
       return;
     }
@@ -31,15 +29,13 @@ function FormSignUp() {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         if (userCredential.user) {
-          console.log(photoURL, displayName);
           const user = auth.currentUser;
 
           updateProfile(user, {
             displayName: displayName, // some displayName,
-            photoURL: photoURL, // some photo url
+            photoURL: "", // some photo url
           });
         }
-        // Signed in
         const user = userCredential.user;
         dispatch(
           setUser({
@@ -47,10 +43,8 @@ function FormSignUp() {
             token: user.accessToken,
             id: user.uid,
             displayName: displayName,
-            photoURL: photoURL,
           })
         );
-        console.log(user);
         navigate("/account");
       })
       .catch((error) => {
@@ -69,17 +63,6 @@ function FormSignUp() {
           name="name"
           value={displayName}
           onChange={(e) => setDisplayName(e.target.value || "")}
-          placeholder="Enter your name"
-        />
-      </label>
-      <label>
-        Profile image url
-        <input
-          className="input-registration"
-          type="text"
-          name="name"
-          value={photoURL}
-          onChange={(e) => setPhotoURL(e.target.value || "")}
           placeholder="Enter your name"
         />
       </label>

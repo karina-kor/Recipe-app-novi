@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  updateProfile,
-} from "firebase/auth";
+import { getAuth, updateProfile, updateEmail } from "firebase/auth";
 import {
   removeUser,
+  setEmail,
   setNameAndPhotoUrl,
 } from "../../../../../store/slices/authSlice";
 import Button from "../../../../Common/Button/Button";
@@ -27,7 +24,6 @@ export default function EditPage() {
     if (e) {
       e.preventDefault();
     }
-    console.log("signing up");
     if (!newphotoURL || !newDisplayName) {
       return;
     }
@@ -49,7 +45,13 @@ export default function EditPage() {
       photoURL: newphotoURL, // some photo url
     })
       .then(() => {
-        console.log("update then", displayName, newphotoURL);
+        if (newEmail && newEmail !== email) {
+          updateEmail(user, newEmail)
+            .then(() => {
+              dispatch(setEmail(newEmail));
+            })
+            .catch((err) => setErrorMsg(err.message));
+        }
         dispatch(
           setNameAndPhotoUrl({
             photoURL: newphotoURL,
