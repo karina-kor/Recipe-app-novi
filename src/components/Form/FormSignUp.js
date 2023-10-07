@@ -21,7 +21,8 @@ function FormSignUp() {
 
   const signup = (e) => {
     e.preventDefault();
-    if (!email || !password) {
+    if (!email || !password || !displayName) {
+      setErrorMsg("Should fill all the fields");
       return;
     }
 

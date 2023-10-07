@@ -91,17 +91,6 @@ export default function EditPage() {
         />
       </label>
       <label className="big_text">
-        Password
-        <input
-          type="text"
-          className="input-account-data"
-          name="password"
-          placeholder="******"
-          value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value || "")}
-        />
-      </label>
-      <label className="big_text">
         Account photo url
         <input
           id="avatar"

@@ -2,10 +2,6 @@
 
 This is a simple web application that allows users to create an account, search, save, and share recipes. The app uses the Edamam API to retrieve recipe data and Firebase as a backend to store user information. This application has been created for educational purposes, as part of my studies as a frontend developer.
 
-## Screenshot  
-![App Screenshot](https://imageupload.io/1nBA7ebIV72VhXZ)  
-
-
 ## Connecting the Web Application
 
 Follow the steps to run the application.
@@ -32,4 +28,5 @@ Start the web application using the following command: npm run start
 Available account:
 email: 123@123.com password: 123123
 ## Screenshots  
-![App Screenshot](https://imageupload.io/1nBA7ebIV72VhXZ)  
+![App Screenshot](https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png)  
+Screenshot 2023-10-07 at 23.56.08.png

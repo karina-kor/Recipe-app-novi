@@ -7,10 +7,9 @@ import bellpepper from "../../../../../assets/pictures/bellpepper.png";
 import coconut from "../../../../../assets/pictures/coconut.png";
 import cake from "../../../../../assets/pictures/cake.png";
 import toast from "../../../../../assets/pictures/toast.png";
-import gluten from "../../../../../assets/pictures/gluten.png";
+import brunchbread from "../../../../../assets/pictures/brunch.png";
 import sesame from "../../../../../assets/pictures/sesame.png";
 import milk from "../../../../../assets/pictures/milk.png";
-import peanuts from "../../../../../assets/pictures/peanuts.png";
 import Button from "../../../../Common/Button/Button";
 import "./blockright.css";
 import "../../../../../App.css";
@@ -155,7 +154,7 @@ function BlockRight({ type, setFilters, handleNext, getQuizResults, results }) {
         <>
           <section className="meal-types">
             <figure className="option">
-              <img className="meal-type" src={sesame} alt="breakfast"></img>
+              <img className="meal-type" src={milk} alt="breakfast"></img>
               <Button
                 buttonClass="button button-orange"
                 label={"Breakfast"}
@@ -167,7 +166,7 @@ function BlockRight({ type, setFilters, handleNext, getQuizResults, results }) {
               />
             </figure>
             <figure className="option">
-              <img className="meal-type" src={peanuts} alt="brunch"></img>
+              <img className="meal-type" src={brunchbread} alt="brunch"></img>
               <Button
                 buttonClass="button button-orange"
                 label={"Brunch"}
@@ -181,7 +180,7 @@ function BlockRight({ type, setFilters, handleNext, getQuizResults, results }) {
           </section>
           <section className="meal-types">
             <figure className="option">
-              <img className="meal-type" src={gluten} alt="lunch"></img>
+              <img className="meal-type" src={toast} alt="lunch"></img>
               <Button
                 buttonClass="button button-orange"
                 label={"Lunch"}
@@ -193,7 +192,7 @@ function BlockRight({ type, setFilters, handleNext, getQuizResults, results }) {
               />
             </figure>
             <figure className="option">
-              <img className="meal-type" src={milk} alt="snack"></img>
+              <img className="meal-type" src={sesame} alt="snack"></img>
               <Button
                 buttonClass="button button-orange"
                 label={"Snack"}
