@@ -17,6 +17,8 @@ function SearchPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [filters, setFilters] = useState({
     calories: "100-10000",
+    caloriesFrom: 100,
+    caloriesTo: 10000,
   });
   const [results, setResults] = useState([]);
 
@@ -55,7 +57,7 @@ function SearchPage() {
       })
       .then((data) => {
         if (data.data.hits) {
-          setResults(data.data.hits);
+          setResults(filterByCalories(data.data.hits));
         }
         setIsLoading(false);
       })
@@ -63,6 +65,14 @@ function SearchPage() {
         console.log(err);
         setIsLoading(false);
       });
+  };
+
+  const filterByCalories = (data) => {
+    return data.filter(
+      (recipe) =>
+        recipe.recipe.calories > filters.caloriesFrom &&
+        recipe.recipe.calories < filters.caloriesTo
+    );
   };
 
   return (

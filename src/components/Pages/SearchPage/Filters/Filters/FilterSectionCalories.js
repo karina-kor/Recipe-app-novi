@@ -9,8 +9,13 @@ function FilterSectionCalories({ filters, setFilters }) {
     const maxTemporaryValue = max ? max : 1000;
     const result = `${minTemporaryValue}-${maxTemporaryValue}`;
 
-    setFilters((prev) => ({ ...prev, calories: result }));
-  }, [min, max]);
+    setFilters((prev) => ({
+      ...prev,
+      calories: result,
+      caloriesFrom: minTemporaryValue,
+      caloriesTo: maxTemporaryValue,
+    }));
+  }, [min, max, setFilters]);
 
   return (
     <section className="filter-section">
