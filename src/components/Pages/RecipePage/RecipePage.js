@@ -4,7 +4,7 @@ import Card from "../../Common/Card/Card";
 import Button from "../../Common/Button/Button";
 import ButtonLink from "../../Common/Button/ButtonLink";
 import axios from "axios";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useSelector } from "react-redux";
 
 const appKey = process.env.REACT_APP_RECIPE_APP_KEY;
@@ -13,8 +13,9 @@ const apiUrl = process.env.REACT_APP_RECIPE_APP_URL;
 
 function RecipePage() {
   let { uri } = useParams();
-  const search = "soup";
   const url = `${apiUrl}search`;
+  const navigate = useNavigate();
+  const [search, setSearch] = useState("bread");
 
   const [result, setResult] = useState();
   const [suggestions, setSuggestions] = useState([]);
@@ -63,6 +64,10 @@ function RecipePage() {
     getRecipes();
   }, [uri, url]);
 
+  const handleButtonClick = () => {
+    navigate("/search/" + search);
+  };
+
   const handleAddToFavorite = () => {
     if (!token) {
       alert("You have to login for the recipe saving ");
@@ -79,7 +84,13 @@ function RecipePage() {
 
   return (
     <section className="shadow-card white_page">
-      <Header headerClass="header" navClass="nav-right" />
+      <Header
+        headerClass="header"
+        navClass="nav-right"
+        handleButtonClick={handleButtonClick}
+        search={search}
+        setSearch={setSearch}
+      />
       <section className="top-side-page">
         <h3>{result?.label || "Unknown"}</h3>
         <section className="top-info-page">

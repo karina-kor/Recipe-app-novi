@@ -4,7 +4,7 @@ import "./components/Common/Search/search.css";
 import SearchPage from "./components/Pages/SearchPage/SearchPage";
 import RecipePage from "./components/Pages/RecipePage/RecipePage";
 import AccountPage from "./components/Pages/AccountPage/AccountPage";
-import Main from "./components/Pages/Main/ Main";
+import Main from "./components/Pages/Main/Main";
 import NotFound from "./components/Pages/NotFound/NotFound";
 import Spline from "@splinetool/react-spline";
 import { Routes, Route } from "react-router-dom";

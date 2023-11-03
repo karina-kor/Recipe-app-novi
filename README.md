@@ -3,7 +3,7 @@
 This is a simple web application that allows users to create an account, search, save, and share recipes. The app uses the Edamam API to retrieve recipe data and Firebase as a backend to store user information. This application has been created for educational purposes, as part of my studies as a frontend developer.
 
 ## Screenshot  
-![App Screenshot](https://ibb.co/2dzRN4f)  
+![App Screenshot](https://i.ibb.co/0r01tbd/Screenshot-2023-10-07-at-23-56-08.png)  
 
 
 ## Connecting the Web Application
