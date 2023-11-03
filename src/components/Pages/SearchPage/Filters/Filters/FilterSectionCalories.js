@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 
 function FilterSectionCalories({ filters, setFilters }) {
   const [min, setMin] = useState(0);
-  const [max, setMax] = useState(1000);
+  const [max, setMax] = useState(5000);
 
   useEffect(() => {
     const minTemporaryValue = min ? min : 0;
-    const maxTemporaryValue = max ? max : 1000;
+    const maxTemporaryValue = max ? max : 5000;
     const result = `${minTemporaryValue}-${maxTemporaryValue}`;
 
     setFilters((prev) => ({
