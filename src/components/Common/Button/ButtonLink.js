@@ -1,12 +1,11 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react'
 
 function ButtonLink({ buttonClass, label, href }) {
-  return (
-    <a href={href} className={buttonClass}>
-      {label}
-    </a>
-  );
+	return (
+		<a href={href} className={buttonClass}>
+			{label}
+		</a>
+	)
 }
 
-export default ButtonLink;
+export default ButtonLink

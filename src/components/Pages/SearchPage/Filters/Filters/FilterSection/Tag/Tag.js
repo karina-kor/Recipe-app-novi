@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React from 'react'
 
 function Tag({ label, isActive, setIsActive }) {
-  return (
-    <button
-      className={`filter-option big-text  ${
-        isActive && "filter-active big-text-active"
-      }`}
-      onClick={() => setIsActive?.()}
-    >
-      {label}
-    </button>
-  );
+	return (
+		<button
+			className={`filter-option big-text  ${
+				isActive && 'filter-active big-text-active'
+			}`}
+			onClick={() => setIsActive?.()}
+		>
+			{label}
+		</button>
+	)
 }
 
-export default Tag;
+export default Tag

@@ -1,20 +1,21 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useContext } from 'react'
+import { MainContext } from '../../../../../App'
 
 export default function InfoPage() {
-  const { email, displayName } = useSelector((state) => state.auth);
-  return (
-    <>
-      <section className="description-text">
-        <div className="big_text">Name</div>
-        <h4>{displayName}</h4>
-      </section>
-      <section className="description-text">
-        <section className="description-text">
-          <div className="big_text">Email address</div>
-          <h4>{email}</h4>
-        </section>
-      </section>
-    </>
-  );
+	const { user } = useContext(MainContext)
+
+	return (
+		<>
+			<section className="description-text">
+				<div className="big_text">Name</div>
+				<h4>{user.displayName}</h4>
+			</section>
+			<section className="description-text">
+				<section className="description-text">
+					<div className="big_text">Email address</div>
+					<h4>{user.email}</h4>
+				</section>
+			</section>
+		</>
+	)
 }
