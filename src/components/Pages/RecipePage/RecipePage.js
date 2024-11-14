@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import Header from "../../Header/Header";
-import Card from "../../Common/Card/Card";
-import Button from "../../Common/Button/Button";
-import ButtonLink from "../../Common/Button/ButtonLink";
-import axios from "axios";
-import { useNavigate, useParams } from "react-router";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect, useContext } from 'react';
+import { AuthUserContext } from '../../../context/AuthContext';
+import Header from '../../Header/Header';
+import Card from '../../Common/Card/Card';
+import Button from '../../Common/Button/Button';
+import ButtonLink from '../../Common/Button/ButtonLink';
+import axios from 'axios';
+import { useNavigate, useParams } from 'react-router';
 
 const appKey = process.env.REACT_APP_RECIPE_APP_KEY;
 const appId = process.env.REACT_APP_RECIPE_APP_ID;
@@ -15,13 +15,14 @@ function RecipePage() {
   let { uri } = useParams();
   const url = `${apiUrl}search`;
   const navigate = useNavigate();
-  const [search, setSearch] = useState("bread");
+  const [search, setSearch] = useState('bread');
 
   const [result, setResult] = useState();
   const [suggestions, setSuggestions] = useState([]);
   const [likedRecipes, setLikedRecipes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const { token } = useSelector((state) => state.auth);
+  const { userData } = useContext(AuthUserContext);
+  const { token } = userData;
   // const [viewedRecipes, setViewedRecipes] = useState([]);
 
   const getRecipes = () => {
@@ -54,7 +55,7 @@ function RecipePage() {
         params: {
           app_id: appId,
           app_key: appKey,
-          r: "http://www.edamam.com/ontologies/edamam.owl#" + uri,
+          r: 'http://www.edamam.com/ontologies/edamam.owl#' + uri,
         },
       })
       .then((data) => {
@@ -65,21 +66,21 @@ function RecipePage() {
   }, [uri, url]);
 
   const handleButtonClick = () => {
-    navigate("/search/" + search);
+    navigate('/search/' + search);
   };
 
   const handleAddToFavorite = () => {
     if (!token) {
-      alert("You have to login for the recipe saving ");
+      alert('You have to login for the recipe saving ');
     }
 
     const localStorageLikedRecipes = JSON.parse(
-      localStorage.getItem("likedRecipes")
+      localStorage.getItem('likedRecipes')
     );
 
     const newLikedArray = [...(localStorageLikedRecipes || []), result];
 
-    localStorage.setItem("likedRecipes", JSON.stringify(newLikedArray));
+    localStorage.setItem('likedRecipes', JSON.stringify(newLikedArray));
   };
 
   return (
@@ -92,7 +93,7 @@ function RecipePage() {
         setSearch={setSearch}
       />
       <section className="top-side-page">
-        <h3>{result?.label || "Unknown"}</h3>
+        <h3>{result?.label || 'Unknown'}</h3>
         <section className="top-info-page">
           <section className="top-side-left">
             <img
@@ -117,21 +118,21 @@ function RecipePage() {
               <section className="description-text">
                 <h4>Preparation</h4>
                 <ButtonLink
-                  buttonClass={"big-text button button-brown"}
-                  label={"See instructions"}
+                  buttonClass={'big-text button button-brown'}
+                  label={'See instructions'}
                   href={result?.url}
                   to="/"
                 />
                 <Button
                   onClick={handleAddToFavorite}
-                  buttonClass={"big-text button button-brown button-empty"}
-                  label={"Save"}
+                  buttonClass={'big-text button button-brown button-empty'}
+                  label={'Save'}
                 />
 
                 <Button
                   onClick={() => navigator.clipboard.writeText(result?.url)}
-                  buttonClass={"big-text button button-brown button-empty"}
-                  label={"Copy link"}
+                  buttonClass={'big-text button button-brown button-empty'}
+                  label={'Copy link'}
                 />
               </section>
             </section>

@@ -1,28 +1,27 @@
-import React, { useState } from "react";
-import "./form.css";
+import React, { useState, useContext } from 'react';
+import './form.css';
 import {
   getAuth,
   createUserWithEmailAndPassword,
   updateProfile,
-} from "firebase/auth";
-import { useDispatch } from "react-redux";
-import { setUser } from "../../store/slices/authSlice";
-import { useNavigate } from "react-router-dom";
-import Button from "../Common/Button/Button";
+} from 'firebase/auth';
+import { AuthUserContext } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import Button from '../Common/Button/Button';
 
 function FormSignUp() {
-  const dispatch = useDispatch();
+  const { updateUserData } = useContext(AuthUserContext);
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [displayName, setDisplayName] = useState("");
-  const [errorMsg, setErrorMsg] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [displayName, setDisplayName] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
 
   const signup = (e) => {
     e.preventDefault();
     if (!email || !password || !displayName) {
-      setErrorMsg("Should fill all the fields");
+      setErrorMsg('Should fill all the fields');
       return;
     }
 
@@ -34,19 +33,17 @@ function FormSignUp() {
 
           updateProfile(user, {
             displayName: displayName, // some displayName,
-            photoURL: "", // some photo url
+            photoURL: '', // some photo url
           });
         }
         const user = userCredential.user;
-        dispatch(
-          setUser({
-            email: user.email,
-            token: user.accessToken,
-            id: user.uid,
-            displayName: displayName,
-          })
-        );
-        navigate("/account");
+        updateUserData({
+          email: user.email,
+          token: user.accessToken,
+          id: user.uid,
+          displayName: displayName,
+        });
+        navigate('/account');
       })
       .catch((error) => {
         setErrorMsg(error.message);
@@ -55,7 +52,7 @@ function FormSignUp() {
 
   return (
     <form className="form">
-      {errorMsg && <div style={{ color: "red" }}>{errorMsg}</div>}
+      {errorMsg && <div style={{ color: 'red' }}>{errorMsg}</div>}
       <label>
         What's your name?
         <input
@@ -63,7 +60,7 @@ function FormSignUp() {
           type="text"
           name="name"
           value={displayName}
-          onChange={(e) => setDisplayName(e.target.value || "")}
+          onChange={(e) => setDisplayName(e.target.value || '')}
           placeholder="Enter your name"
         />
       </label>
@@ -74,7 +71,7 @@ function FormSignUp() {
           type="email"
           name="email"
           value={email}
-          onChange={(e) => setEmail(e.target.value || "")}
+          onChange={(e) => setEmail(e.target.value || '')}
           placeholder="Enter your email"
         />
       </label>
@@ -85,13 +82,13 @@ function FormSignUp() {
           type="password"
           name="password"
           value={password}
-          onChange={(e) => setPassword(e.target.value || "")}
+          onChange={(e) => setPassword(e.target.value || '')}
           placeholder="Choose your password"
         />
       </label>
       <Button
-        buttonClass={"button button-green"}
-        label={"Sign up"}
+        buttonClass={'button button-green'}
+        label={'Sign up'}
         onClick={signup}
       />
     </form>

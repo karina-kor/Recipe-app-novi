@@ -1,44 +1,45 @@
-import React, { useEffect, useState } from "react";
-import Card from "../../Common/Card/Card";
-import Header from "../../Header/Header";
-import "../../../App.css";
-import AccountBlockLeft from "./AccountBlockLeft/AccountBlockLeft";
-import AccountBlockRight from "./AccountBlockRight/AccountBlockRight";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState, useContext } from 'react';
+import Card from '../../Common/Card/Card';
+import Header from '../../Header/Header';
+import '../../../App.css';
+import AccountBlockLeft from './AccountBlockLeft/AccountBlockLeft';
+import AccountBlockRight from './AccountBlockRight/AccountBlockRight';
+import { AuthUserContext } from '../../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 function AccountPage() {
-  const [type, setPageType] = useState("info-page");
+  const [type, setPageType] = useState('info-page');
   const [likedRecipes, setLikedRecipes] = useState([]);
   const [viewedRecipes, setViewedRecipes] = useState([]);
   const navigate = useNavigate();
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
 
-  const { displayName } = useSelector((state) => state.auth);
+  const { userData } = useContext(AuthUserContext);
+  const { displayName } = userData;
 
   useEffect(() => {
     const localStorageLikedRecipes = JSON.parse(
-      localStorage.getItem("likedRecipes")
+      localStorage.getItem('likedRecipes')
     );
     setLikedRecipes(localStorageLikedRecipes);
   }, []);
 
   useEffect(() => {
     const localStorageViewedRecipes = JSON.parse(
-      localStorage.getItem("viewedRecipes")
+      localStorage.getItem('viewedRecipes')
     );
     setViewedRecipes(localStorageViewedRecipes);
   }, []);
 
   const handleHoverButtonDeleteLiked = (recipe) => {
     const localStorageLikedRecipes = JSON.parse(
-      localStorage.getItem("likedRecipes")
+      localStorage.getItem('likedRecipes')
     );
     const recipesWithNoChosenRecipe = localStorageLikedRecipes.filter(
       (lslRecipe) => lslRecipe.uri !== recipe.uri
     );
     localStorage.setItem(
-      "likedRecipes",
+      'likedRecipes',
       JSON.stringify(recipesWithNoChosenRecipe)
     );
     window.location.reload();
@@ -46,20 +47,20 @@ function AccountPage() {
 
   const handleHoverButtonDeleteViewed = (recipe) => {
     const localStorageViewedRecipes = JSON.parse(
-      localStorage.getItem("viewedRecipes")
+      localStorage.getItem('viewedRecipes')
     );
     const recipesWithNoChosenRecipe = localStorageViewedRecipes.filter(
       (lslRecipe) => lslRecipe.uri !== recipe.uri
     );
     localStorage.setItem(
-      "viewedRecipes",
+      'viewedRecipes',
       JSON.stringify(recipesWithNoChosenRecipe)
     );
     window.location.reload();
   };
 
   const handleButtonClick = () => {
-    navigate("/search/" + search);
+    navigate('/search/' + search);
   };
 
   return (

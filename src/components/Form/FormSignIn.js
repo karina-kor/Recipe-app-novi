@@ -1,25 +1,23 @@
-import React, { useState } from "react";
-import "./form.css";
-import ButtonRouterLink from "../Common/Button/ButtonRouterLink";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { useDispatch } from "react-redux";
-import { setUser } from "../../store/slices/authSlice";
-import { useNavigate } from "react-router";
-import Button from "../Common/Button/Button";
+import React, { useState, useContext } from 'react';
+import './form.css';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { AuthUserContext } from '../../context/AuthContext';
+import { useNavigate } from 'react-router';
+import Button from '../Common/Button/Button';
 
 function FormSignIn() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { updateUserData } = useContext(AuthUserContext);
 
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
-  const [errorMsg, setErrorMsg] = useState("");
+  const [errorMsg, setErrorMsg] = useState('');
 
   const signin = (e) => {
     e.preventDefault();
-    console.log("signing up");
+    console.log('signing up');
     if (!email || !password) {
-      setErrorMsg("Fill in your e-mail and password");
+      setErrorMsg('Fill in your e-mail and password');
       return;
     }
 
@@ -28,17 +26,15 @@ function FormSignIn() {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        dispatch(
-          setUser({
-            email: user.email,
-            token: user.accessToken,
-            id: user.uid,
-            displayName: user.displayName,
-            photoURL: user.photoURL,
-          })
-        );
+        updateUserData({
+          email: user.email,
+          token: user.accessToken,
+          id: user.uid,
+          displayName: user.displayName,
+          photoURL: user.photoURL,
+        });
         console.log(user);
-        navigate("/account");
+        navigate('/account');
       })
       .catch((error) => {
         setErrorMsg(error.message);
@@ -47,7 +43,7 @@ function FormSignIn() {
 
   return (
     <form className="form">
-      {errorMsg && <div style={{ color: "red" }}>{errorMsg}</div>}
+      {errorMsg && <div style={{ color: 'red' }}>{errorMsg}</div>}
       <label>
         Email
         <input
@@ -69,8 +65,8 @@ function FormSignIn() {
         />
       </label>
       <Button
-        buttonClass={"button button-green"}
-        label={"Sign in"}
+        buttonClass={'button button-green'}
+        label={'Sign in'}
         onClick={signin}
       />
     </form>

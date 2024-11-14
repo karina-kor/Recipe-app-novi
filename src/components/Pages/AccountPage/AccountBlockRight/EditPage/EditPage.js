@@ -1,24 +1,20 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router";
-import { getAuth, updateProfile, updateEmail } from "firebase/auth";
-import {
-  removeUser,
-  setEmail,
-  setNameAndPhotoUrl,
-} from "../../../../../store/slices/authSlice";
-import Button from "../../../../Common/Button/Button";
+import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router';
+import { getAuth, updateProfile, updateEmail } from 'firebase/auth';
+import Button from '../../../../Common/Button/Button';
+import { AuthUserContext } from '../../../../../context/AuthContext';
 
 export default function EditPage() {
-  const { email, displayName, photoURL } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
+  const { userData, updateUserData, resetUserData } =
+    useContext(AuthUserContext);
+  const { email, displayName, photoURL } = userData;
   const navigate = useNavigate();
 
-  const [newEmail, setNewEmail] = useState(email || "");
-  const [newPassword, setNewPassword] = useState("");
-  const [newDisplayName, setNewDisplayName] = useState(displayName || "");
-  const [newphotoURL, setNewphotoURL] = useState(photoURL || "");
-  const [errorMsg, setErrorMsg] = useState("");
+  const [newEmail, setNewEmail] = useState(email || '');
+  const [newPassword, setNewPassword] = useState('');
+  const [newDisplayName, setNewDisplayName] = useState(displayName || '');
+  const [newphotoURL, setNewphotoURL] = useState(photoURL || '');
+  const [errorMsg, setErrorMsg] = useState('');
 
   const signup = (e) => {
     if (e) {
@@ -32,11 +28,11 @@ export default function EditPage() {
 
     console.log(newphotoURL, newDisplayName);
     const user = auth.currentUser;
-    console.log("currentUser", user);
+    console.log('currentUser', user);
 
     if (!user) {
-      dispatch(removeUser());
-      navigate("/signin");
+      resetUserData();
+      navigate('/signin');
       return;
     }
 
@@ -48,16 +44,14 @@ export default function EditPage() {
         if (newEmail && newEmail !== email) {
           updateEmail(user, newEmail)
             .then(() => {
-              dispatch(setEmail(newEmail));
+              updateUserData({ email: newEmail });
             })
             .catch((err) => setErrorMsg(err.message));
         }
-        dispatch(
-          setNameAndPhotoUrl({
-            photoURL: newphotoURL,
-            displayName: newDisplayName,
-          })
-        );
+        updateUserData({
+          photoURL: newphotoURL,
+          displayName: newDisplayName,
+        });
       })
       .catch((err) => setErrorMsg(err.message));
 
@@ -67,7 +61,7 @@ export default function EditPage() {
 
   return (
     <form className="form">
-      {errorMsg && <div style={{ color: "red" }}>{errorMsg}</div>}
+      {errorMsg && <div style={{ color: 'red' }}>{errorMsg}</div>}
       <label className="big_text">
         Name
         <input
@@ -76,7 +70,7 @@ export default function EditPage() {
           name="name"
           placeholder="John Doe"
           value={newDisplayName}
-          onChange={(e) => setNewDisplayName(e.target.value || "")}
+          onChange={(e) => setNewDisplayName(e.target.value || '')}
         />
       </label>
       <label className="big_text">
@@ -87,7 +81,7 @@ export default function EditPage() {
           name="email"
           placeholder="johndoe@gmail.com"
           value={newEmail}
-          onChange={(e) => setNewEmail(e.target.value || "")}
+          onChange={(e) => setNewEmail(e.target.value || '')}
         />
       </label>
       <label className="big_text">
@@ -98,12 +92,12 @@ export default function EditPage() {
           className="input-account-data"
           placeholder="Paste url"
           value={newphotoURL}
-          onChange={(e) => setNewphotoURL(e.target.value || "")}
+          onChange={(e) => setNewphotoURL(e.target.value || '')}
         ></input>
       </label>
       <Button
-        buttonClass={"button button-brown big-text"}
-        label={"Save changes"}
+        buttonClass={'button button-brown big-text'}
+        label={'Save changes'}
         onClick={signup}
       />
     </form>

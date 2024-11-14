@@ -1,8 +1,9 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useContext } from 'react';
+import { AuthUserContext } from '../../../../../context/AuthContext';
 
 export default function InfoPage() {
-  const { email, displayName } = useSelector((state) => state.auth);
+  const { userData } = useContext(AuthUserContext);
+  const { email, displayName } = userData;
   return (
     <>
       <section className="description-text">

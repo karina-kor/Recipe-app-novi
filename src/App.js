@@ -1,27 +1,29 @@
-import "./App.css";
-import "../src/components/Common/Button/button.css";
-import "./components/Common/Search/search.css";
-import SearchPage from "./components/Pages/SearchPage/SearchPage";
-import RecipePage from "./components/Pages/RecipePage/RecipePage";
-import AccountPage from "./components/Pages/AccountPage/AccountPage";
-import Main from "./components/Pages/Main/Main";
-import NotFound from "./components/Pages/NotFound/NotFound";
-import Spline from "@splinetool/react-spline";
-import { Routes, Route } from "react-router-dom";
-import React from "react";
-import SignIn from "./components/Pages/Main/Hero/SignIn/SignIn";
-import SignUp from "./components/Pages/Main/Hero/SignUp/SignUp";
-import SignUpPage from "./components/Pages/Main/Hero/SignUp/SignUpPage";
-import SigninPage from "./components/Pages/Main/Hero/SignIn/SigninPage";
-import { useSelector } from "react-redux";
+import './App.css';
+import '../src/components/Common/Button/button.css';
+import './components/Common/Search/search.css';
+import { useContext } from 'react';
+import { AuthUserContext } from './context/AuthContext';
+import SearchPage from './components/Pages/SearchPage/SearchPage';
+import RecipePage from './components/Pages/RecipePage/RecipePage';
+import AccountPage from './components/Pages/AccountPage/AccountPage';
+import Main from './components/Pages/Main/Main';
+import NotFound from './components/Pages/NotFound/NotFound';
+import Spline from '@splinetool/react-spline';
+import { Routes, Route } from 'react-router-dom';
+import React from 'react';
+import SignIn from './components/Pages/Main/Hero/SignIn/SignIn';
+import SignUp from './components/Pages/Main/Hero/SignUp/SignUp';
+import SignUpPage from './components/Pages/Main/Hero/SignUp/SignUpPage';
+import SigninPage from './components/Pages/Main/Hero/SignIn/SigninPage';
 
 function App() {
-  const { token } = useSelector((state) => state.auth);
+  const { userData } = useContext(AuthUserContext);
+  const { token } = userData;
   return (
     <div className="App" id="App">
       <div className="container">
         <Routes>
-          <Route path="/" element={<Main />} />{" "}
+          <Route path="/" element={<Main />} />{' '}
           <Route path="/search/" element={<SearchPage />} />
           <Route path="/search/:searchText" element={<SearchPage />} />
           <Route path="/recipe/:uri" element={<RecipePage />} />

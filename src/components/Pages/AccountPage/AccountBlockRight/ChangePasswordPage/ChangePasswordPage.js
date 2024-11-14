@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router";
-import { getAuth, updatePassword } from "firebase/auth";
-import { removeUser, setUser } from "../../../../../store/slices/authSlice";
-import Button from "../../../../Common/Button/Button";
+import React, { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router';
+import { getAuth, updatePassword } from 'firebase/auth';
+import { AuthUserContext } from '../../../../../context/AuthContext';
+import Button from '../../../../Common/Button/Button';
 
 export default function ChangePasswordPage({ setPage }) {
-  const { email, displayName, photoURL } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
+  const { userData, updateUserData, resetUserData } =
+    useContext(AuthUserContext);
+  const { email, displayName, photoURL } = userData;
   const navigate = useNavigate();
 
-  const [newEmail, setNewEmail] = useState(email || "");
-  const [newPassword, setNewPassword] = useState("");
-  const [newPasswordConfirm, setNewPasswordConfirm] = useState("");
-  const [errorMsg, setErrorMsg] = useState("");
+  const [newEmail, setNewEmail] = useState(email || '');
+  const [newPassword, setNewPassword] = useState('');
+  const [newPasswordConfirm, setNewPasswordConfirm] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
 
   useEffect(() => {
     if (newPassword !== newPasswordConfirm) {
-      setErrorMsg("Paswords should match");
+      setErrorMsg('Paswords should match');
     }
   }, [newPassword, newPasswordConfirm]);
 
@@ -37,36 +37,34 @@ export default function ChangePasswordPage({ setPage }) {
     const user = auth.currentUser;
 
     if (!user) {
-      dispatch(removeUser());
-      navigate("/signin");
+      resetUserData();
+      navigate('/signin');
       return;
     }
 
     updatePassword(user, newPassword)
       .then(() => {
-        dispatch(
-          setUser({
-            email: user.email,
-            token: user.accessToken,
-            id: user.uid,
-            displayName: displayName,
-            photoURL: photoURL,
-          })
-        );
-        setPage("info-page");
+        updateUserData({
+          email: user.email,
+          token: user.accessToken,
+          id: user.uid,
+          displayName: displayName,
+          photoURL: photoURL,
+        });
+        setPage('info-page');
       })
       .catch((err) => {
         setErrorMsg(err.message);
         if (err.code === 400) {
-          dispatch(removeUser());
-          navigate("/signin");
+          resetUserData();
+          navigate('/signin');
         }
       });
   };
 
   return (
     <form className="form">
-      {errorMsg && <div style={{ color: "red" }}>{errorMsg}</div>}
+      {errorMsg && <div style={{ color: 'red' }}>{errorMsg}</div>}
       <label className="big_text">
         Password
         <input
@@ -75,7 +73,7 @@ export default function ChangePasswordPage({ setPage }) {
           name="password"
           placeholder="password"
           value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value || "")}
+          onChange={(e) => setNewPassword(e.target.value || '')}
         />
       </label>
       <label className="big_text">
@@ -86,12 +84,12 @@ export default function ChangePasswordPage({ setPage }) {
           name="password"
           placeholder="password confirm"
           value={newPasswordConfirm}
-          onChange={(e) => setNewPasswordConfirm(e.target.value || "")}
+          onChange={(e) => setNewPasswordConfirm(e.target.value || '')}
         />
       </label>
       <Button
-        buttonClass={"button button-brown big-text"}
-        label={"Save changes"}
+        buttonClass={'button button-brown big-text'}
+        label={'Save changes'}
         onClick={signup}
       />
     </form>
