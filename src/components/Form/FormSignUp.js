@@ -1,16 +1,11 @@
 import React, { useState, useContext } from 'react';
 import './form.css';
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  updateProfile,
-} from 'firebase/auth';
 import { AuthUserContext } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import Button from '../Common/Button/Button';
 
 function FormSignUp() {
-  const { updateUserData } = useContext(AuthUserContext);
+  const { signUp } = useContext(AuthUserContext);
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
@@ -25,24 +20,8 @@ function FormSignUp() {
       return;
     }
 
-    const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        if (userCredential.user) {
-          const user = auth.currentUser;
-
-          updateProfile(user, {
-            displayName: displayName, // some displayName,
-            photoURL: '', // some photo url
-          });
-        }
-        const user = userCredential.user;
-        updateUserData({
-          email: user.email,
-          token: user.accessToken,
-          id: user.uid,
-          displayName: displayName,
-        });
+    signUp(email, password, displayName)
+      .then(() => {
         navigate('/account');
       })
       .catch((error) => {

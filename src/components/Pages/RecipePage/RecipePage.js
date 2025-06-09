@@ -13,7 +13,6 @@ const apiUrl = process.env.REACT_APP_RECIPE_APP_URL;
 
 function RecipePage() {
   let { uri } = useParams();
-  const url = `${apiUrl}search`;
   const navigate = useNavigate();
   const [search, setSearch] = useState('bread');
 
@@ -28,12 +27,13 @@ function RecipePage() {
   const getRecipes = () => {
     setIsLoading(true);
     axios
-      .get(url, {
+      .get(apiUrl, {
         params: {
           app_id: appId,
           app_key: appKey,
           from: 0,
           to: 10,
+          type: 'any',
           q: search,
         },
       })
@@ -51,19 +51,19 @@ function RecipePage() {
 
   useEffect(() => {
     axios
-      .get(url, {
+      .get(`${apiUrl}/by-uri`, {
         params: {
           app_id: appId,
           app_key: appKey,
-          r: 'http://www.edamam.com/ontologies/edamam.owl#' + uri,
+          uri: 'http://www.edamam.com/ontologies/edamam.owl#' + uri,
         },
       })
       .then((data) => {
-        setResult(data.data[0]);
+        setResult(data.data.hits[0].recipe);
         // console.log(data);
       });
     getRecipes();
-  }, [uri, url]);
+  }, [uri]);
 
   const handleButtonClick = () => {
     navigate('/search/' + search);

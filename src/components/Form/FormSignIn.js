@@ -1,13 +1,12 @@
 import React, { useState, useContext } from 'react';
 import './form.css';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { AuthUserContext } from '../../context/AuthContext';
 import { useNavigate } from 'react-router';
 import Button from '../Common/Button/Button';
 
 function FormSignIn() {
   const navigate = useNavigate();
-  const { updateUserData } = useContext(AuthUserContext);
+  const { signIn } = useContext(AuthUserContext);
 
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
@@ -21,19 +20,8 @@ function FormSignIn() {
       return;
     }
 
-    const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        updateUserData({
-          email: user.email,
-          token: user.accessToken,
-          id: user.uid,
-          displayName: user.displayName,
-          photoURL: user.photoURL,
-        });
-        console.log(user);
+    signIn(email, password)
+      .then(() => {
         navigate('/account');
       })
       .catch((error) => {

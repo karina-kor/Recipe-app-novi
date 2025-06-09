@@ -1,16 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router';
-import { getAuth, updatePassword } from 'firebase/auth';
 import { AuthUserContext } from '../../../../../context/AuthContext';
 import Button from '../../../../Common/Button/Button';
 
 export default function ChangePasswordPage({ setPage }) {
-  const { userData, updateUserData, resetUserData } =
-    useContext(AuthUserContext);
-  const { email, displayName, photoURL } = userData;
+  const { resetUserData, changePassword } = useContext(AuthUserContext);
   const navigate = useNavigate();
 
-  const [newEmail, setNewEmail] = useState(email || '');
   const [newPassword, setNewPassword] = useState('');
   const [newPasswordConfirm, setNewPasswordConfirm] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
@@ -21,7 +17,7 @@ export default function ChangePasswordPage({ setPage }) {
     }
   }, [newPassword, newPasswordConfirm]);
 
-  const signup = (e) => {
+  const changePasswordClick = (e) => {
     if (e) {
       e.preventDefault();
     }
@@ -33,24 +29,8 @@ export default function ChangePasswordPage({ setPage }) {
       return;
     }
 
-    const auth = getAuth();
-    const user = auth.currentUser;
-
-    if (!user) {
-      resetUserData();
-      navigate('/signin');
-      return;
-    }
-
-    updatePassword(user, newPassword)
+    changePassword(newPassword)
       .then(() => {
-        updateUserData({
-          email: user.email,
-          token: user.accessToken,
-          id: user.uid,
-          displayName: displayName,
-          photoURL: photoURL,
-        });
         setPage('info-page');
       })
       .catch((err) => {
@@ -90,7 +70,7 @@ export default function ChangePasswordPage({ setPage }) {
       <Button
         buttonClass={'button button-brown big-text'}
         label={'Save changes'}
-        onClick={signup}
+        onClick={changePasswordClick}
       />
     </form>
   );

@@ -1,22 +1,23 @@
-import React, { useState, useEffect } from "react";
-import Header from "../../Header/Header";
-import Card from "../../Common/Card/Card";
-import Filters from "./Filters/Filters/Filters";
-import "../../../App.css";
-import axios from "axios";
-import { useParams } from "react-router";
+import React, { useState, useEffect } from 'react';
+import Header from '../../Header/Header';
+import Card from '../../Common/Card/Card';
+import Filters from './Filters/Filters/Filters';
+import '../../../App.css';
+import axios from 'axios';
+import { useParams } from 'react-router';
 
+// const appKey = process.env.REACT_APP_RECIPE_APP_KEY;
+// const appId = process.env.REACT_APP_RECIPE_APP_ID;
 const appKey = process.env.REACT_APP_RECIPE_APP_KEY;
 const appId = process.env.REACT_APP_RECIPE_APP_ID;
 const apiUrl = process.env.REACT_APP_RECIPE_APP_URL;
-const url = `${apiUrl}search`;
 
 function SearchPage() {
   const { searchText } = useParams();
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [filters, setFilters] = useState({
-    calories: "100-10000",
+    calories: '100-10000',
     caloriesFrom: 100,
     caloriesTo: 10000,
   });
@@ -28,7 +29,7 @@ function SearchPage() {
   }, [searchText]);
 
   useEffect(() => {
-    console.log("filters", filters);
+    console.log('filters', filters);
   }, [filters]);
 
   const handleSearch = () => {
@@ -45,10 +46,11 @@ function SearchPage() {
     }
     setIsLoading(true);
     axios
-      .get(url, {
+      .get(apiUrl, {
         params: {
           app_id: appId,
           app_key: appKey,
+          type: 'any',
           from: 0,
           to: 100,
           q: search || searchText,

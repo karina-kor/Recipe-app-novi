@@ -1,22 +1,20 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router';
-import { getAuth, updateProfile, updateEmail } from 'firebase/auth';
 import Button from '../../../../Common/Button/Button';
 import { AuthUserContext } from '../../../../../context/AuthContext';
 
 export default function EditPage() {
-  const { userData, updateUserData, resetUserData } =
+  const { userData, changeEmail, changeNameAndPhoto } =
     useContext(AuthUserContext);
   const { email, displayName, photoURL } = userData;
   const navigate = useNavigate();
 
   const [newEmail, setNewEmail] = useState(email || '');
-  const [newPassword, setNewPassword] = useState('');
   const [newDisplayName, setNewDisplayName] = useState(displayName || '');
   const [newphotoURL, setNewphotoURL] = useState(photoURL || '');
   const [errorMsg, setErrorMsg] = useState('');
 
-  const signup = (e) => {
+  const changeProfileDataHandler = (e) => {
     if (e) {
       e.preventDefault();
     }
@@ -24,39 +22,16 @@ export default function EditPage() {
       return;
     }
 
-    const auth = getAuth();
-
-    console.log(newphotoURL, newDisplayName);
-    const user = auth.currentUser;
-    console.log('currentUser', user);
-
-    if (!user) {
-      resetUserData();
-      navigate('/signin');
-      return;
-    }
-
-    updateProfile(user, {
-      displayName: newDisplayName, // some displayName,
-      photoURL: newphotoURL, // some photo url
-    })
+    changeNameAndPhoto(newDisplayName, newphotoURL)
       .then(() => {
         if (newEmail && newEmail !== email) {
-          updateEmail(user, newEmail)
-            .then(() => {
-              updateUserData({ email: newEmail });
-            })
-            .catch((err) => setErrorMsg(err.message));
+          return changeEmail(newEmail);
         }
-        updateUserData({
-          photoURL: newphotoURL,
-          displayName: newDisplayName,
-        });
       })
-      .catch((err) => setErrorMsg(err.message));
-
-    console.log(photoURL, displayName);
-    console.log(user);
+      .catch((err) => {
+        setErrorMsg(err.message);
+        navigate('/signin');
+      });
   };
 
   return (
@@ -98,7 +73,7 @@ export default function EditPage() {
       <Button
         buttonClass={'button button-brown big-text'}
         label={'Save changes'}
-        onClick={signup}
+        onClick={changeProfileDataHandler}
       />
     </form>
   );
