@@ -1,12 +1,12 @@
-import React from "react";
-import Button from "../../../../Common/Button/Button";
-import ButtonRouterLink from "../../../../Common/Button/ButtonRouterLink";
-import LogoRouterLink from "../../../../Common/LogoRouterLink/LogoRouterLink";
+import React from 'react';
+import Button from '../../../../Common/Button/Button';
+import ButtonRouterLink from '../../../../Common/Button/ButtonRouterLink';
+import LogoRouterLink from '../../../../Common/LogoRouterLink/LogoRouterLink';
 
 function BlockLeft({ type, handleNext, setFilters }) {
   return (
     <div className="block-left">
-      {type === "step-0" && (
+      {type === 'step-0' && (
         <>
           <section className="content">
             <LogoRouterLink />
@@ -20,13 +20,13 @@ function BlockLeft({ type, handleNext, setFilters }) {
             <Button
               buttonClass="button button-orange"
               label="Find top 4"
-              onClick={() => handleNext("step-1")}
+              onClick={() => handleNext('step-1')}
             />
           </section>
         </>
       )}
 
-      {type === "step-1" && (
+      {type === 'step-1' && (
         <>
           <section className="content">
             <LogoRouterLink />
@@ -40,7 +40,7 @@ function BlockLeft({ type, handleNext, setFilters }) {
         </>
       )}
 
-      {type === "step-2" && (
+      {type === 'step-2' && (
         <>
           <section className="content">
             <LogoRouterLink />
@@ -54,7 +54,7 @@ function BlockLeft({ type, handleNext, setFilters }) {
         </>
       )}
 
-      {type === "step-2a" && (
+      {type === 'step-2a' && (
         <>
           <section className="content">
             <LogoRouterLink />
@@ -68,7 +68,7 @@ function BlockLeft({ type, handleNext, setFilters }) {
         </>
       )}
 
-      {type === "step-3" && (
+      {type === 'step-3' && (
         <>
           <section className="content">
             <LogoRouterLink />
@@ -84,12 +84,12 @@ function BlockLeft({ type, handleNext, setFilters }) {
           </section>
         </>
       )}
-      {type === "step-4" && (
+      {type === 'step-4' && (
         <>
           <section className="content">
             <LogoRouterLink />
             <h3>4/4</h3>
-            <h2>Do you have any allergies?</h2>
+            <h2>Which type of meal are you interested in?</h2>
             <p className="main-description">
               Choose what appeals to your senses: Sweet for a touch of
               indulgence or savory for a fulfilling and savory sensation.
@@ -97,7 +97,7 @@ function BlockLeft({ type, handleNext, setFilters }) {
           </section>
         </>
       )}
-      {type === "step-5" && (
+      {type === 'step-5' && (
         <>
           <section className="content">
             <LogoRouterLink />
@@ -116,13 +116,13 @@ function BlockLeft({ type, handleNext, setFilters }) {
                 label="Try again"
                 onClick={() => {
                   setFilters({});
-                  handleNext("step-0");
+                  handleNext('step-0');
                 }}
               />
               <ButtonRouterLink
                 buttonClass="button button-green"
                 label="All recipes"
-                to={"/search"}
+                to={'/search'}
               />
             </div>
           </section>
