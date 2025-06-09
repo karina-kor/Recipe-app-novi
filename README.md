@@ -12,7 +12,10 @@ Follow the steps to run the application.
 
 ### 1. Receive project file with API Keys:
 
-Option 1: Request API Keys from Edamam and set up Firebase
+1. Clone the repository
+2. Create a .env file based on .env.example.
+3. Fill in your own keys:
+Option 1: Request API Keys from Edamam (https://www.edamam.com/) and set up Firebase (https://firebase.google.com/).
 Option 2: (Novi University of Applied Sciences) Receive a project file that contains the required API keys and configuration data. This file should include an .env file preconfigured with API keys and Firebase configuration data.
 
 ### 2. Unpack the Project:
@@ -27,7 +30,7 @@ Navigate to the unpacked project directory and run the following command to inst
 
 Start the web application using the following command: npm run start
 
-### Use Login Credentials:
+### Use Demo Login Credentials:
 
 Available account:
 email: anna@gmail.com password: anna123
