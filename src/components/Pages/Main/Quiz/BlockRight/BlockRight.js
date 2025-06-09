@@ -205,7 +205,7 @@ function BlockRight({ type, setFilters, handleNext, getQuizResults, results }) {
         <>
           <section className="recipe-options">
             {results?.map((result) => (
-              <Card key={result.uri} recipe={result.recipe} />
+              <Card key={result.recipe.uri} recipe={result.recipe} />
             ))}
           </section>
 

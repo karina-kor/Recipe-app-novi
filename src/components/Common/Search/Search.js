@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
-import "./search.css";
-import { ReactComponent as Search_button } from "../../../assets/icons/search.svg";
-import { useNavigate } from "react-router";
+import React, { useEffect, useState } from 'react';
+import './search.css';
+import { ReactComponent as Search_button } from '../../../assets/icons/search.svg';
 
 function Search({
   searchClass,
@@ -19,7 +18,7 @@ function Search({
         type={inputType}
         placeholder={inputPlaceholder}
         value={search}
-        onChange={(e) => setSearch(e.target.value || "")}
+        onChange={(e) => setSearch(e.target.value || '')}
       ></input>
       <button className="search-button" onClick={handleButtonClick}>
         <Search_button />

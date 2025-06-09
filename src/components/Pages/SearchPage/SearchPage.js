@@ -25,7 +25,9 @@ function SearchPage() {
 
   useEffect(() => {
     getRecipes();
-    setSearch(searchText);
+    if (searchText) {
+      setSearch(searchText);
+    }
   }, [searchText]);
 
   useEffect(() => {
@@ -95,7 +97,7 @@ function SearchPage() {
             <section className="result-wrapper">
               {results.length > 0 ? (
                 results?.map((result) => (
-                  <Card recipe={result.recipe} key={result.uri} />
+                  <Card recipe={result.recipe} key={result.recipe.uri} />
                 ))
               ) : (
                 <div>Nothing found :(</div>

@@ -14,7 +14,7 @@ const apiUrl = process.env.REACT_APP_RECIPE_APP_URL;
 function RecipePage() {
   let { uri } = useParams();
   const navigate = useNavigate();
-  const [search, setSearch] = useState('bread');
+  const [search, setSearch] = useState('');
 
   const [result, setResult] = useState();
   const [suggestions, setSuggestions] = useState([]);
