@@ -106,9 +106,10 @@ export const AuthUserDataProvider = ({ children }) => {
   };
 
   const changePassword = async (newPassword) => {
-    if (!firebaseAuthObject) throw MISSING_AUTH_OBJECT_ERROR;
+    if (!firebaseAuthObject || !firebaseAuthObject.currentUser)
+      throw MISSING_AUTH_OBJECT_ERROR;
 
-    await updatePassword(firebaseAuthObject, newPassword);
+    await updatePassword(firebaseAuthObject.currentUser, newPassword);
   };
 
   const changeNameAndPhoto = async (newDisplayName, newphotoURL) => {
@@ -126,15 +127,6 @@ export const AuthUserDataProvider = ({ children }) => {
     });
   };
 
-  const changeEmail = async (newEmail) => {
-    if (!firebaseAuthObject || !firebaseAuthObject.currentUser)
-      throw MISSING_AUTH_OBJECT_ERROR;
-
-    await updateEmail(firebaseAuthObject.currentUser, newEmail);
-
-    updateUserData({ email: newEmail });
-  };
-
   return (
     <AuthUserContext.Provider
       value={{
@@ -145,7 +137,6 @@ export const AuthUserDataProvider = ({ children }) => {
         signUp,
         changePassword,
         changeNameAndPhoto,
-        changeEmail,
       }}
     >
       {children}

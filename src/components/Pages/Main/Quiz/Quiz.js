@@ -1,20 +1,14 @@
-import React, { useState, useEffect } from "react";
-import BlockLeft from "./BlockLeft/BlockLeft";
-import BlockRight from "./BlockRight/BlockRight";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import BlockLeft from './BlockLeft/BlockLeft';
+import BlockRight from './BlockRight/BlockRight';
+import axios from 'axios';
+
+const appKey = process.env.REACT_APP_RECIPE_APP_KEY;
+const appId = process.env.REACT_APP_RECIPE_APP_ID;
+const apiUrl = process.env.REACT_APP_RECIPE_APP_URL;
 
 export default function Quiz() {
-  // Убрать
-  // Начало
-  const appKey = "bb5e26e7d2295dcde8cf13d5b57a4ae5";
-  const appId = "81f321c0";
-
-  const apiUrl = "https://api.edamam.com/";
-
-  const url = `${apiUrl}search`;
-  // Конец
-
-  const [step, setStep] = useState("step-0");
+  const [step, setStep] = useState('step-0');
   const [results, setResults] = useState([]);
   const [filters, setFilters] = useState({});
 
@@ -23,23 +17,22 @@ export default function Quiz() {
   }, [filters]);
 
   const getQuizResults = () => {
-    console.log("getQuizResults");
+    console.log('getQuizResults');
     axios
-      .get(url, {
+      .get(apiUrl, {
         params: {
           app_id: appId,
           app_key: appKey,
-          from: 0,
-          to: 4,
-          q: "",
-          calories: "0-10000",
+          type: 'any',
+          q: '',
+          calories: '0-10000',
           ...filters,
         },
       })
       .then((data) => {
         if (data.data.hits) {
-          setResults(data.data.hits);
-          console.log(data);
+          const firstFourItems = data.data.hits.slice(0, 4);
+          setResults(firstFourItems);
         }
       })
       .catch((err) => console.log(err));

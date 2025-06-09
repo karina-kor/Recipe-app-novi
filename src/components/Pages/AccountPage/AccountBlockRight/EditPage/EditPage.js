@@ -4,12 +4,10 @@ import Button from '../../../../Common/Button/Button';
 import { AuthUserContext } from '../../../../../context/AuthContext';
 
 export default function EditPage() {
-  const { userData, changeEmail, changeNameAndPhoto } =
-    useContext(AuthUserContext);
-  const { email, displayName, photoURL } = userData;
+  const { userData, changeNameAndPhoto } = useContext(AuthUserContext);
+  const { displayName, photoURL } = userData;
   const navigate = useNavigate();
 
-  const [newEmail, setNewEmail] = useState(email || '');
   const [newDisplayName, setNewDisplayName] = useState(displayName || '');
   const [newphotoURL, setNewphotoURL] = useState(photoURL || '');
   const [errorMsg, setErrorMsg] = useState('');
@@ -22,16 +20,10 @@ export default function EditPage() {
       return;
     }
 
-    changeNameAndPhoto(newDisplayName, newphotoURL)
-      .then(() => {
-        if (newEmail && newEmail !== email) {
-          return changeEmail(newEmail);
-        }
-      })
-      .catch((err) => {
-        setErrorMsg(err.message);
-        navigate('/signin');
-      });
+    changeNameAndPhoto(newDisplayName, newphotoURL).catch((err) => {
+      setErrorMsg(err.message);
+      navigate('/signin');
+    });
   };
 
   return (
@@ -46,17 +38,6 @@ export default function EditPage() {
           placeholder="John Doe"
           value={newDisplayName}
           onChange={(e) => setNewDisplayName(e.target.value || '')}
-        />
-      </label>
-      <label className="big_text">
-        Email address
-        <input
-          type="text"
-          className="input-account-data"
-          name="email"
-          placeholder="johndoe@gmail.com"
-          value={newEmail}
-          onChange={(e) => setNewEmail(e.target.value || '')}
         />
       </label>
       <label className="big_text">
