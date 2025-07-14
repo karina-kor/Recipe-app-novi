@@ -35,4 +35,4 @@ Start the web application using the following command: npm run start
 Available account:
 email: anna@gmail.com password: anna123
 ## Screenshots  
-![App Screenshot]([[https://i.postimg.cc/c1vZRS3n/Edit-page.png](https://ibb.co/jkdKCdPM](https://i.ibb.co/QvZBWZ3N/Recipe-page.png)  
+![App Screenshot](https://i.postimg.cc/c1vZRS3n/Edit-page.png](https://ibb.co/jkdKCdPM](https://i.ibb.co/QvZBWZ3N/Recipe-page.png)  
